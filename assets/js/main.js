@@ -1,4 +1,5 @@
 
+
 (function() {
   "use strict";
 
@@ -168,9 +169,32 @@
       backDelay: 2000
     });
   }
+  /**
+   * Minimalist Split View for Experience Section
+   */
+  const splitViewNavItems = document.querySelectorAll('.split-view-nav li');
+
+  splitViewNavItems.forEach(item => {
+    item.addEventListener('click', function() {
+      // Remove active class from all nav items
+      splitViewNavItems.forEach(i => i.classList.remove('active'));
+
+      // Add active class to clicked item
+      this.classList.add('active');
+
+      const targetId = this.getAttribute('data-target');
+      const allPanels = document.querySelectorAll('.split-view-panel');
+
+      // Hide all panels
+      allPanels.forEach(panel => panel.classList.remove('active'));
+
+      // Show the target panel
+      document.getElementById(targetId).classList.add('active');
+    });
+  });
 
   /**
-   * Testimonials slider
+   * Skills slider
    */
   new Swiper('.services-slider', {
     speed: 600,
@@ -188,70 +212,34 @@
     breakpoints: {
       320: {
         slidesPerView: 1,
-        spaceBetween: 20
+        spaceBetween: 20,
+        slidesPerGroup: 1
       },
       768: {
         slidesPerView: 2,
-        spaceBetween: 20
+        spaceBetween: 20,
+        slidesPerGroup: 2
       },
       1200: {
         slidesPerView: 4,
-        spaceBetween: 20
+        spaceBetween: 20,
+        slidesPerGroup: 4
       }
     }
   });
 
-  /**
-   * Porfolio isotope and filter
+
+    /**
+   * Horizontal Scroll Progress Bar
    */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
-      });
+  const scrollContainer = document.querySelector('.portfolio-scroller');
+  const progressBar = document.querySelector('.progress-bar');
 
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-
-      }, true);
-    }
-
-  });
-
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
+  if (scrollContainer && progressBar) {
+    scrollContainer.addEventListener('scroll', () => {
+      const scrollableWidth = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      const scrollPercent = (scrollContainer.scrollLeft / scrollableWidth) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    });
+  }
 })()
