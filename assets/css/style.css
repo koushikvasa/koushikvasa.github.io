@@ -742,11 +742,12 @@ p {
 --------------------------------------------------------------*/
 #portfolio {
   padding: 0;
-  height: 100vh; /* Make the entire section full-screen */
+  min-height: 100vh; /* allow full-screen feel without forcing overflow */
+  height: auto;
   background-color: #f7f7f7;
   display: flex;
   flex-direction: column;
-  padding-bottom: 10vh;
+  overflow-y: hidden; /* prevent unwanted vertical scroll inside the section */
 }
 
 .portfolio-header {
@@ -779,6 +780,7 @@ p {
   flex-grow: 1; /* Allows the scroller to fill the remaining space */
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -858,11 +860,16 @@ p {
 
 .slide-image {
   flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide-image img {
   width: 100%;
+  max-height: 420px;
   height: auto;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
