@@ -1830,6 +1830,8 @@ p {
 #contact {
   height: auto;
   width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 .contact-details {
@@ -1839,7 +1841,33 @@ p {
 }
 
 .contact-details li {
-  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.contact-details li i {
+  color: var(--accent);
+  font-size: 16px;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.contact-details li span,
+.contact-details li a {
+  color: var(--text-primary) !important;
+  font-size: 15px;
+}
+
+.contact-details li a:hover {
+  color: var(--accent) !important;
+}
+
+[data-theme="light"] .contact-details li span,
+[data-theme="light"] .contact-details li a {
+  color: #374151 !important;
 }
 
 #contact input, #contact textarea {
@@ -2048,8 +2076,8 @@ blockquote {
 --------------------------------------------------------------*/
 #footer {
   background: #f7f7f7;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #footer .socials-media {
@@ -2817,4 +2845,72 @@ blockquote {
 
 [data-theme="light"] .split-view-nav li h4 {
   color: #0d1117 !important;
+}
+
+/* Footer compact */
+#footer p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ================================================
+   PORTFOLIO ARROW HINT
+================================================ */
+.portfolio-arrow-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 0 25px 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.arrow-animation {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.arrow-animation i {
+  color: var(--accent);
+  font-size: 14px;
+  animation: arrow-pulse 1.2s infinite;
+}
+
+.arrow-animation i:nth-child(1) {
+  animation-delay: 0s;
+  opacity: 0.3;
+}
+
+.arrow-animation i:nth-child(2) {
+  animation-delay: 0.2s;
+  opacity: 0.6;
+}
+
+.arrow-animation i:nth-child(3) {
+  animation-delay: 0.4s;
+  opacity: 1;
+}
+
+@keyframes arrow-pulse {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-arrow-hint {
+    display: none;
+  }
 }
