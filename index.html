@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="utf-8">
@@ -25,6 +25,9 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- GSAP ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 </head>
 
@@ -49,22 +52,80 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="bi bi-sun-fill" id="themeIcon"></i>
+      </button>
+
     </div>
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
    <div id="hero" class="home">
-    <div class="container">
+    <canvas id="heroCanvas"></canvas>
+    <div class="container" style="position:relative; z-index:1;">
       <div class="hero-content">
-        <h1>I'm <span class="typed" data-typed-items="Koushik Vasa, an AI/ML Specialist, a Full-Stack Developer, a ML Engineer"></span></h1>
-        <p>Building the future, one byte at a time</p>
+        <div class="hero-badges">
+          <span class="hero-badge badge-available">
+            <i class="bi bi-circle-fill"></i>
+            Available for Full-Time Roles
+          </span>
+          <span class="hero-badge badge-location">
+            <i class="bi bi-geo-alt-fill"></i>
+            New York City, NY
+          </span>
+          <span class="hero-badge badge-work">
+            <i class="bi bi-patch-check-fill"></i>
+            OPT Work Authorized
+          </span>
+        </div>
+        <h1>I'm <span class="typed" data-typed-items="Koushik Vasa, an AI/ML Engineer, a Full-Stack Developer, a Gen AI Specialist"></span></h1>
+        <p>Building intelligent systems that work in the real world</p>
 
         <ul class="list-unstyled list-social">
-          <li><a href="https://www.linkedin.com/in/koushik-vasa-b595b01a3" target="_parent"><i class="bi bi-linkedin"></i></a></li>
-          <li><a href="https://github.com/koushikvasa" target="_parent"><i class="bi bi-github"></i></a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=100005458361550" target="_parent"><i class="bi bi-facebook"></i></a></li>
-          <li><a href="https://www.instagram.com/k_.oushi._k" target="_parent"><i class="bi bi-instagram"></i></a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/koushik-vasa-b595b01a3" target="_blank">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/koushikvasa" target="_blank">
+              <i class="bi bi-github"></i>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:vasakoushik@gmail.com">
+              <i class="bi bi-envelope"></i>
+            </a>
+          </li>
         </ul>
+
+        <div class="hero-btns">
+          <a href="#portfolio" class="hero-btn-primary scrollto">
+            View My Work
+          </a>
+          <a href="assets/Koushik vasa resume.pdf" class="hero-btn-secondary" download>
+            Download Resume
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">2+</span>
+            <span class="hero-stat-label">Years Experience</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">8+</span>
+            <span class="hero-stat-label">Projects Shipped</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">13</span>
+            <span class="hero-stat-label">Certifications</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-number">3</span>
+            <span class="hero-stat-label">Internships</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -88,8 +149,8 @@
           <div class="col-lg-7">
             <div class="about-descr">
 
-              <p class="p-heading">I am an <strong>AI/ML Engineer</strong> and <strong>Full-Stack Developer</strong> passionate about building the future of intelligent software. With a Master’s degree focusing on Machine Learning and professional experience in Frontend Development (Vue.js/React).</p>
-              <p class="separator">I specialize in transforming cutting-edge capabilities—like Generative AI and LLMs—into intuitive, impactful tools. My comprehensive understanding of the full stack allows me to design systems where the user interface and the AI model work in perfect harmony, maximizing both accuracy and usability.</p>
+              <p class="p-heading">I am a <strong>AI/ML Engineer</strong> and <strong>Full-Stack Developer</strong> focused on shipping production AI systems. With an MS in Machine Learning from George Mason University and hands-on experience building RAG pipelines, LLM agents, and scalable AI infrastructure, I specialize in turning research-grade models into reliable, user-facing applications.</p>
+              <p class="separator">My work spans the full stack — from embedding pipelines and prompt orchestration to React frontends and FastAPI backends. I have built and deployed multi-agent systems, fact-checking RAG architectures, and AI-powered platforms handling millions of provider records, always with a focus on inference reliability, latency optimization, and measurable real-world impact.</p>
             </div>
 
           </div>
@@ -115,7 +176,7 @@
                                 <span class="period">Jan 2024 - Dec 2025</span>
                             </div>
                         </div>
-                        <p class="gpa"><strong>GPA: 3.85</strong></p>
+                        <p class="gpa"><strong>GPA: 3.87</strong></p>
                     </div>
                     <div class="education-item">
                         <div class="row">
@@ -144,60 +205,73 @@
         <div class="split-view-container">
             <div class="split-view-nav">
                 <ul>
-                    <li class="active" data-target="job-cyware">
-                        <h4>Software Engineering Intern</h4>
-                        <span>Cyware Labs Pvt Ltd</span>
+                    <li class="active" data-target="job-bridgenow">
+                        <h4>AI Engineer</h4>
+                        <span>BridgeNow AI</span>
                     </li>
-                    <li data-target="job-srm">
-                        <h4>Technical Lead - Innovation Cell</h4>
-                        <span>SRM University AP</span>
+                    <li data-target="job-cyware">
+                        <h4>AI Software Engineering Intern</h4>
+                        <span>Cyware Labs</span>
+                    </li>
+                    <li data-target="job-genai">
+                        <h4>AI Engineering Intern</h4>
+                        <span>Gen AI Pioneer</span>
                     </li>
                     <li data-target="job-codetree">
                         <h4>Web Development Intern</h4>
                         <span>Code Tree Software</span>
                     </li>
-                    <li data-target="job-believe">
-                        <h4>Engagement Coordinator</h4>
-                        <span>Believe Careers</span>
+                    <li data-target="job-srm">
+                        <h4>Technical Lead</h4>
+                        <span>SRM Innovation Cell</span>
                     </li>
                 </ul>
             </div>
 
             <div class="split-view-content">
-                <div class="split-view-panel active" id="job-cyware">
-                    <h3>Software Engineering Intern <span class="company">@ Cyware Labs</span></h3>
-                    <span class="period">Jan 2023 - Aug 2023</span>
+                <div class="split-view-panel active" id="job-bridgenow">
+                    <h3>AI Engineer <span class="company">@ BridgeNow AI</span></h3>
+                    <span class="period">Feb 2026 – Present</span>
                     <ul>
-                        <li>Developed and maintained responsive user interfaces using Vue.js, successfully migrating the core product from Vue 2 to Vue 3 to enhance performance.</li>
-                        <li>Proactively troubleshot and resolved over 150 bugs within an 8-month period, significantly improving product stability and reliability.</li>
-                        <li>Collaborated with cross-functional product and design teams to implement new features and optimize existing code for the company's core product.</li>
+                        <li>Architected and shipped Bridgette, a production RAG pipeline backed by LangChain orchestration and semantic search over vector embeddings that intelligently matches users to domain experts at scale, owning full system design from intake through match delivery.</li>
+                        <li>Designed the end-to-end agent architecture including embedding pipelines, retrieval optimization, and API integration layers, ensuring low-latency inference and reliable LLM output across production workflows.</li>
+                        <li>Iterated rapidly on prompt orchestration strategies and LLM features in an early-stage startup environment, driving full-stack deployment from model integration to scalable backend API delivery.</li>
                     </ul>
                 </div>
-                <div class="split-view-panel" id="job-srm">
-                    <h3>Technical Lead - Innovation Cell <span class="company">@ SRM University AP</span></h3>
-                    <span class="period">Dec 2020 - Dec 2022</span>
+                <div class="split-view-panel" id="job-cyware">
+                    <h3>AI Software Engineering Intern <span class="company">@ Cyware Labs</span></h3>
+                    <span class="period">Jan 2023 – Dec 2023</span>
                     <ul>
-                        <li>Mentored 10+ student teams on AI/ML implementation and full-stack prototyping, directly facilitating the launch of 4 campus startups and boosting technical engagement by 30%.</li>
-                        <li>Spearheaded the digital transformation of the incubation center by architecting a resource management portal, streamlining workflow for student ventures and reducing administrative latency by 40%.</li>
-                        <li>Led outreach and marketing initiatives to promote the department's work, securing 7 industry partnerships that provided students with valuable mentorship and technical resources.</li>
+                        <li>Shipped a Vue 2 to Vue 3 migration across 20+ components on real-time threat intelligence dashboards used by SOC analysts, delivering a 30% performance boost and measurable latency reduction in ML-driven insight delivery.</li>
+                        <li>Resolved 150+ integration failures between frontend interfaces and backend AI services, diagnosing data pipeline bottlenecks and ensuring reliable, lag-free delivery of anomaly detection outputs to end users.</li>
+                        <li>Built Python automation pipelines that cleaned and normalized raw security logs at scale, cutting manual data preparation by 50% and improving upstream data quality for downstream ML model inference.</li>
+                    </ul>
+                </div>
+                <div class="split-view-panel" id="job-genai">
+                    <h3>AI Engineering Intern <span class="company">@ Gen AI Pioneer</span></h3>
+                    <span class="period">Jan 2022 – Dec 2022</span>
+                    <ul>
+                        <li>Designed and deployed autonomous Python-based agents to orchestrate complex multi-step NLP workflows using Hugging Face transformers, reducing manual processing time by 65% and improving end-to-end pipeline reliability across enterprise data sources.</li>
+                        <li>Fine-tuned BERT and DistilBERT models using PyTorch on domain-specific datasets, applying Scikit-learn evaluation metrics to benchmark classification accuracy and measure model reliability improvements across iterative training runs.</li>
+                        <li>Engineered and tested prompt design strategies across multiple LLM endpoints, systematically measuring response accuracy and reducing output inconsistency through structured evaluation, iteration, and controlled prompt versioning.</li>
                     </ul>
                 </div>
                 <div class="split-view-panel" id="job-codetree">
                     <h3>Web Development Intern <span class="company">@ Code Tree Software</span></h3>
-                    <span class="period">Jun 2021 - Aug 2021</span>
+                    <span class="period">Jun 2021 – Aug 2021</span>
                     <ul>
-                        <li>Developed dynamic front-end components for the Andhra Pradesh State Warehousing Corporation (APSWC) government website using Angular and Bootstrap.</li>
-                        <li>Systematically debugged the codebase to identify and resolve development-phase issues, ensuring the project remained on its deployment schedule.</li>
-                        <li>Contributed to a significant improvement in overall site responsiveness and user experience for a critical government web platform.</li>
+                        <li>Architected 10+ dynamic UI pages for the Andhra Pradesh State Warehousing Corporation portal using Angular and Bootstrap, achieving 25% faster page load speeds and full mobile responsiveness.</li>
+                        <li>Enhanced digital experience for government clients, contributing to a 15% increase in user engagement and more efficient access to logistics and inventory data.</li>
+                        <li>Collaborated on the full SDLC from design to deployment, integrating features that improved backend data access with SQL databases.</li>
                     </ul>
                 </div>
-                <div class="split-view-panel" id="job-believe">
-                    <h3>Engagement Coordinator <span class="company">@ Believe Careers</span></h3>
-                    <span class="period">Jun 2020 - Aug 2020</span>
+                <div class="split-view-panel" id="job-srm">
+                    <h3>Technical Lead <span class="company">@ SRM Innovation Cell</span></h3>
+                    <span class="period">Dec 2020 – Dec 2022</span>
                     <ul>
-                        <li>Devised and executed comprehensive marketing strategies to elevate program visibility and drive participant enrollment.</li>
-                        <li>Managed multi-platform social media campaigns and created compelling digital presentations to boost audience interaction.</li>
-                        <li>Successfully increased program awareness and participant engagement through targeted and effective digital outreach initiatives.</li>
+                        <li>Mentored 10+ student teams on AI/ML implementation and full-stack prototyping, directly facilitating the launch of 4 campus startups and boosting technical engagement by 30%.</li>
+                        <li>Architected a resource management portal for the incubation center, reducing administrative latency by 40% and streamlining workflow for student ventures.</li>
+                        <li>Secured 7 industry partnerships providing students with mentorship and access to technical resources.</li>
                     </ul>
                 </div>
             </div>
@@ -370,6 +444,86 @@
             <p class="separator">The ability to guide, inspire, and motivate a group towards achieving a common goal.</p>
           </div>
         </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-link"></i>
+            <span>LangChain</span>
+            <p class="separator">An orchestration framework for building LLM-powered applications and autonomous AI agent workflows.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>LangGraph</span>
+            <p class="separator">A framework for building stateful multi-agent pipelines with graph-based LLM orchestration.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>RAG Pipelines</span>
+            <p class="separator">Retrieval-Augmented Generation systems combining vector search with LLM inference for reliable outputs.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-database"></i>
+            <span>Vector Databases</span>
+            <p class="separator">Specialized databases optimized for embedding storage and semantic similarity search at scale.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-bolt"></i>
+            <span>FastAPI</span>
+            <p class="separator">A high-performance Python web framework for building production-ready AI and ML backend APIs.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-brands fa-react"></i>
+            <span>Next.js</span>
+            <p class="separator">A React framework for building production-grade full-stack web applications with server-side rendering.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-brands fa-docker"></i>
+            <span>Docker</span>
+            <p class="separator">A containerization platform for consistent, scalable deployment of AI applications across environments.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-fire"></i>
+            <span>PyTorch</span>
+            <p class="separator">An open-source deep learning framework for building and training neural network models.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-solid fa-gears"></i>
+            <span>MLOps</span>
+            <p class="separator">Practices and tools for deploying, monitoring, and maintaining ML models reliably in production.</p>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="services-block">
+            <i class="fa-brands fa-js"></i>
+            <span>TypeScript</span>
+            <p class="separator">A strongly typed superset of JavaScript for building scalable, maintainable web applications.</p>
+          </div>
+        </div>
         
       </div>
       <div class="swiper-pagination"></div>
@@ -388,14 +542,41 @@
   </div>
 
   <div class="container">
-    <div class="journal-block">
+      <div class="journal-block">
       <div class="row">
 
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
             <div class="journal-txt">
-              <h4><a href="https://brm-certview.oracle.com/ords/certview/ecertificate?ssn=OC5265271&trackId=OCI24AICFA&key=0ae6736740ad910ee0d56fe7eba4c696b7279212" target="_blank" rel="noopener noreferrer">Oracle AI Foundations Associate</a></h4>
-              <p class="separator">Oracle</p>
+              <h4><a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer">Microsoft Fabric Analytics Engineer Associate</a></h4>
+              <p class="separator">Microsoft | Jan 2026</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="journal-info">
+            <div class="journal-txt">
+              <h4><a href="https://www.credly.com/badges/a8180fef-de55-48de-9c0f-35315bb23914/public_url" target="_blank" rel="noopener noreferrer">Generative AI with LLMs</a></h4>
+              <p class="separator">NVIDIA | Jan 2026</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="journal-info">
+            <div class="journal-txt">
+              <h4><a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer">Agentforce Specialist</a></h4>
+              <p class="separator">Salesforce | Dec 2025</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="journal-info">
+            <div class="journal-txt">
+              <h4><a href="https://brm-certview.oracle.com/ords/certview/ecertificate?ssn=OC5265271&trackId=OCI24AICFA&key=0ae6736740ad910ee0d56fe7eba4c696b7279212" target="_blank" rel="noopener noreferrer">OCI 2024 AI Foundations Associate</a></h4>
+              <p class="separator">Oracle | Oct 2024</p>
             </div>
           </div>
         </div>
@@ -404,7 +585,7 @@
           <div class="journal-info">
             <div class="journal-txt">
               <h4><a href="https://credentials.databricks.com/ce240459-c193-448c-8000-8b8f474b02a1" target="_blank" rel="noopener noreferrer">Generative AI Fundamentals</a></h4>
-              <p class="separator">Databricks</p>
+              <p class="separator">Databricks | Aug 2024</p>
             </div>
           </div>
         </div>
@@ -413,7 +594,7 @@
           <div class="journal-info">
             <div class="journal-txt">
               <h4><a href="https://courses.cognitiveclass.ai/certificates/9b34c6b98779422e98d4e527bae862b2" target="_blank" rel="noopener noreferrer">Prompt Engineering for Everyone</a></h4>
-              <p class="separator">IBM</p>
+              <p class="separator">IBM | Aug 2024</p>
             </div>
           </div>
         </div>
@@ -422,16 +603,7 @@
           <div class="journal-info">
             <div class="journal-txt">
               <h4><a href="https://www.linkedin.com/learning/certificates/7e480352de058d0ede709dd12a041cbcb1fdfe17d5c0eafd0f3401e5c44d3e18" target="_blank" rel="noopener noreferrer">Career Essentials in Generative AI</a></h4>
-              <p class="separator">Microsoft & LinkedIn</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/6HXHL9R4YHUX" target="_blank" rel="noopener noreferrer">Machine Learning Foundations</a></h4>
-              <p class="separator">Coursera</p>
+              <p class="separator">Microsoft &amp; LinkedIn | Jul 2023</p>
             </div>
           </div>
         </div>
@@ -440,7 +612,7 @@
           <div class="journal-info">
             <div class="journal-txt">
               <h4><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XVN87DK68B7A" target="_blank" rel="noopener noreferrer">Full-Stack Web Development with React</a></h4>
-              <p class="separator">Coursera</p>
+              <p class="separator">Coursera | Jun 2022</p>
             </div>
           </div>
         </div>
@@ -448,26 +620,8 @@
         <div class="col-lg-4 col-md-6">
           <div class="journal-info">
             <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/WJM6DWZF28SV" target="_blank" rel="noopener noreferrer">Front-End JavaScript Frameworks: Angular</a></h4>
-              <p class="separator">Coursera</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/E7GMCQZFBDRM" target="_blank" rel="noopener noreferrer">Frontend UI Frameworks: Bootstrap</a></h4>
-              <p class="separator">Coursera</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/XQGVBDG85A5A" target="_blank" rel="noopener noreferrer">Foundations of User Experience (UX) Design</a></h4>
-              <p class="separator">Coursera</p>
+              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/XQGVBDG85A5A" target="_blank" rel="noopener noreferrer">Foundations of UX Design</a></h4>
+              <p class="separator">Coursera | Jun 2021</p>
             </div>
           </div>
         </div>
@@ -495,13 +649,14 @@
       <div class="slide-content">
         <div class="slide-text">
           <span>Generative AI</span>
-          <h2>CitationSleuth: Fact-Checking RAG</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, Neo4j, RAG, Streamlit</p>
-          <p class="description">Built a dual-layer verification system (semantic similarity + Neo4j graph) to flag hallucinations across 1,000+ HaluEval samples, surfacing unsupported claims in real time via a transparent Streamlit UI.</p>
-          <a href="https://github.com/koushikvasa/CitationSlueth" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          <h2>ClearCare: AI Medicare Cost Navigator</h2>
+          <p class="tech-stack"><strong>Technologies:</strong> Next.js 14, FastAPI, LangGraph, GPT-4o, LangChain, Tavily, ElevenLabs, Supabase, Railway, Vercel</p>
+          <p class="description">Shipped a production AI application with a Next.js 14 frontend and FastAPI backend powered by a LangGraph 8-node multi-agent pipeline that maps patient symptoms to medical procedures and calculates real out-of-pocket costs across 2.8M+ CMS NPI providers, deployed end-to-end on Railway and Vercel.</p>
+          <a href="https://clearcare-orpin.vercel.app/" class="btn-view-project" target="_blank" rel="noopener noreferrer">View Live</a>
+          <a href="https://github.com/koushikvasa/clearcare" class="btn-view-project" target="_blank" rel="noopener noreferrer" style="margin-left: 10px;">View on GitHub</a>
         </div>
         <div class="slide-image">
-          <img src="assets/img/portfolio/citationseluth.png" alt="CitationSleuth interface screenshot">
+          <img src="assets/img/portfolio/clearcare.png" alt="ClearCare AI Medicare Cost Navigator">
         </div>
       </div>
     </section>
@@ -510,9 +665,9 @@
       <div class="slide-content">
         <div class="slide-text">
           <span>AI Platform</span>
-          <h2>MediConnect</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Stream processing, React, Gemini API</p>
-          <p class="description">Engineered an AI-powered healthcare platform that matches patients to 2.8M+ providers in under 500ms using optimized streaming on a 704MB dataset, and integrated Google Gemini to drive a clinical academy with 70+ case studies and 3D models.</p>
+          <h2>MediConnect: AI Healthcare Platform</h2>
+          <p class="tech-stack"><strong>Technologies:</strong> React, Python, FastAPI, Google Gemini API, Stream Processing</p>
+          <p class="description">Engineered a full-stack AI platform that matches patients to 2.8M+ providers in under 500ms by designing custom stream processing architecture to optimize query execution across a 704MB dataset, with measurable latency benchmarks validated at scale.</p>
           <a href="https://github.com/koushikvasa/mediconnect" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
         <div class="slide-image">
@@ -524,10 +679,25 @@
     <section class="portfolio-slide">
       <div class="slide-content">
         <div class="slide-text">
+          <span>Generative AI</span>
+          <h2>CitationSleuth: Fact-Checking RAG</h2>
+          <p class="tech-stack"><strong>Technologies:</strong> Python, Neo4j, HuggingFace, Streamlit, Semantic Similarity</p>
+          <p class="description">Built a dual-layer RAG verification system combining semantic similarity scoring and Neo4j graph retrieval to detect and flag LLM hallucinations across 1,000+ HaluEval benchmark samples, with evaluation metrics tracked end-to-end and a real-time Streamlit interface enforcing 0.7+ similarity thresholds.</p>
+          <a href="https://github.com/koushikvasa/CitationSlueth" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+        <div class="slide-image">
+          <img src="assets/img/portfolio/citationseluth.png" alt="CitationSleuth interface screenshot">
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-slide">
+      <div class="slide-content">
+        <div class="slide-text">
           <span>Machine Learning</span>
           <h2>Predicting Hospital Readmissions</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, Scikit-learn, PCA, Decision Tree</p>
-          <p class="description">Developed a model using a 100k-record dataset to predict 30-day readmissions for diabetic patients. Utilized PCA to increase Decision Tree accuracy by 9% (from 44% to 53%).</p>
+          <p class="tech-stack"><strong>Technologies:</strong> Python, Scikit-learn, PCA, Decision Tree, UCI Dataset</p>
+          <p class="description">Developed an ML classification pipeline to predict 30-day hospital readmissions for diabetic patients trained on 100,000+ patient records, applying PCA for dimensionality reduction and achieving a 9% accuracy improvement on the Decision Tree model from 44% to 53% with measurable evaluation metrics.</p>
           <a href="https://github.com/koushikvasa/Predicting-Hospital-Readmissions-for-Diabetic-Patients" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
         <div class="slide-image">
@@ -541,8 +711,8 @@
         <div class="slide-text">
           <span>Machine Learning</span>
           <h2>Car Temperature Analysis</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, Scikit-learn, Random Forest, KNN</p>
-          <p class="description">Built a predictive model using thermal imaging and data augmentation to forecast in-car temperature, achieving a high R² score of 0.9997 with the Random Forest model.</p>
+          <p class="tech-stack"><strong>Technologies:</strong> Python, KNN, Random Forest, Decision Tree, Thermal Imaging</p>
+          <p class="description">Built a comparative ML pipeline evaluating KNN, Decision Tree, and Random Forest models to forecast in-car temperature from exterior variables, achieving a production-level R² score of 0.9997 with Random Forest validated through rigorous cross-evaluation, using thermal imaging and augmentation for a hardware-free prediction system.</p>
           <a href="https://github.com/koushikvasa/Car-temperature-analysis" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
         <div class="slide-image">
@@ -555,13 +725,28 @@
       <div class="slide-content">
         <div class="slide-text">
           <span>Web Development</span>
-          <h2>APSWC Website</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Angular, Bootstrap, HTML5, CSS3</p>
-          <p class="description">Developed dynamic user interfaces for a government website, improving site responsiveness and overall user experience for the Andhra Pradesh State Warehousing Corporation.</p>
+          <h2>APSWC Government Portal</h2>
+          <p class="tech-stack"><strong>Technologies:</strong> Angular, Bootstrap, HTML5, CSS3, SQL</p>
+          <p class="description">Architected 10+ dynamic UI pages for the Andhra Pradesh State Warehousing Corporation government portal using Angular and Bootstrap, achieving 25% faster page load speeds, full mobile responsiveness, and improved backend data access for a critical government web platform serving logistics and inventory management.</p>
           <a href="https://github.com/koushikvasa/APSWC-Website.git" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
         <div class="slide-image">
-          <img src="assets/img/portfolio/APSWC.jpg" alt="APSWC Website">
+          <img src="assets/img/portfolio/APSWC.jpg" alt="APSWC Government Portal">
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-slide">
+      <div class="slide-content">
+        <div class="slide-text">
+          <span>Web Application</span>
+          <h2>Travel Advisor</h2>
+          <p class="tech-stack"><strong>Technologies:</strong> React.js, Node.js, Google Maps API, OpenWeather API, TripAdvisor API</p>
+          <p class="description">Delivered a full-stack travel planning application integrating three external REST APIs (Google Maps, OpenWeather, TripAdvisor) using React.js, handling 500+ monthly requests with reliable concurrent data fetching and client-side state management architecture for seamless multi-API data orchestration.</p>
+          <a href="https://github.com/koushikvasa/TravelAdvisor.git" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+        <div class="slide-image">
+          <img src="assets/img/portfolio/Traveladvisor.jpg" alt="Travel Advisor App">
         </div>
       </div>
     </section>
@@ -572,26 +757,11 @@
           <span>UI/UX Design</span>
           <h2>Urban Pool</h2>
           <p class="tech-stack"><strong>Technologies:</strong> Figma</p>
-          <p class="description">Created a complete UI/UX design and prototype for a modern carpooling application, focusing on intuitive user flows and a clean visual interface.</p>
+          <p class="description">Created a complete UI/UX design and prototype for a modern carpooling application, focusing on intuitive user flows, scalable component architecture, and a clean visual interface optimized for mobile-first usage patterns.</p>
           <a href="https://www.figma.com/file/Eqykd3KmR6OuDMiJ9ZjEMb/Car?node-id=0%3A1" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on Figma</a>
         </div>
         <div class="slide-image">
           <img src="assets/img/portfolio/urbanpool.jpg" alt="Urban Pool App Design">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Web Application</span>
-          <h2>Travel Advisor</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> React, Google Maps API</p>
-          <p class="description">Built a web application that allows users to find nearby restaurants and attractions with advanced filters, integrated with the Google Maps API for a seamless experience.</p>
-          <a href="https://github.com/koushikvasa/TravelAdvisor.git" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/Traveladvisor.jpg" alt="Travel Advisor App">
         </div>
       </div>
     </section>
@@ -613,8 +783,7 @@
                 <h2 class="mb-30">CONTACT ME AT</h2>
 
                 <ul class="contact-details">
-                  <li><span>10231 evesham ln</span></li>
-                  <li><span>Fairfax, Virginia</span></li>
+                  <li><span>Hauppauge, New York</span></li>
                   <li><span>United States of America</span></li>
                   <li><span>+1 571 420 2558</span></li>
                   <li><span>vasakoushik@gmail.com</span></li>
@@ -635,18 +804,7 @@
   <!-- ======= Footer ======= -->
   <div id="footer" class="text-center">
     <div class="container">
-      <div class="socials-media text-center">
-
-        <ul class="list-unstyled">
-          <li><a href="https://www.facebook.com/profile.php?id=100005458361550" target="_parent"><i class="bi bi-facebook"></i></a></li>
-          <li><a href="https://github.com/koushikvasa" target="_parent"><i class="bi bi-github"></i></a></li>
-          <li><a href="https://www.instagram.com/k_.oushi._k" target="_parent"><i class="bi bi-instagram"></i></a></li>
-          <li><a href="https://www.linkedin.com/in/koushik-vasa-b595b01a3" target="_parent"><i class="bi bi-linkedin"></i></a></li>
-        </ul>
-
-      </div>
-
-
+      <p>© 2026 Koushik Vasa. Built with passion in New York City.</p>
     </div>
   </div><!-- End Footer -->
 
