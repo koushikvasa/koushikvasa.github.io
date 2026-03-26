@@ -1,503 +1,414 @@
+'use strict';
 
+/* ================================================
+   1. MOBILE HAMBURGER MENU
+================================================ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
 
-(function() {
-  "use strict";
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
+if (hamburger) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    if (isOpen) {
+      closeMobileMenu();
     } else {
-      return document.querySelector(el)
-    }
-  }
-
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
-
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
-
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
-  const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
-      }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
-
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
-
-    if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
-    }
-
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
-    })
-  }
-
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
-   */
-  let selectHeader = select('#header')
-  if (selectHeader) {
-    const headerScrolled = () => {
-      if (window.scrollY > 100) {
-        selectHeader.classList.add('header-scrolled')
-      } else {
-        selectHeader.classList.remove('header-scrolled')
-      }
-    }
-    window.addEventListener('load', headerScrolled)
-    onscroll(document, headerScrolled)
-  }
-
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
-
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
-
-  /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
-
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
-
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
-
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
   });
+}
 
-  /**
-   * Hero type effect
-   */
-  const typed = select('.typed')
-  if (typed) {
-    let typed_strings = typed.getAttribute('data-typed-items')
-    typed_strings = typed_strings.split(',')
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
-  }
-  /**
-   * Minimalist Split View for Experience Section
-   */
-  const splitViewNavItems = document.querySelectorAll('.split-view-nav li');
+/* ================================================
+   2. CUSTOM CURSOR (desktop only)
+================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
 
-  splitViewNavItems.forEach(item => {
-    item.addEventListener('click', function() {
-      // Remove active class from all nav items
-      splitViewNavItems.forEach(i => i.classList.remove('active'));
+if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  let mx = 0, my = 0, rx = 0, ry = 0;
 
-      // Add active class to clicked item
-      this.classList.add('active');
-
-      const targetId = this.getAttribute('data-target');
-      const allPanels = document.querySelectorAll('.split-view-panel');
-
-      // Hide all panels
-      allPanels.forEach(panel => panel.classList.remove('active'));
-
-      // Show the target panel
-      document.getElementById(targetId).classList.add('active');
-    });
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
   });
 
-  /**
-   * Skills slider
-   */
-  new Swiper('.services-slider', {
-    speed: 600,
+  (function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  const interactiveEls = 'a, button, .project-card, .exp-card, .edu-card, .cert-badge, .skill-tag, .pill, .contact-link, .badge-float';
+  document.querySelectorAll(interactiveEls).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width  = '20px';
+      cursor.style.height = '20px';
+      cursorRing.style.width  = '56px';
+      cursorRing.style.height = '56px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width  = '12px';
+      cursor.style.height = '12px';
+      cursorRing.style.width  = '36px';
+      cursorRing.style.height = '36px';
+    });
+  });
+}
+
+/* ================================================
+   3. TYPEWRITER (Typed.js)
+================================================ */
+if (typeof Typed !== 'undefined' && document.getElementById('typewriter')) {
+  new Typed('#typewriter', {
+    strings: [
+      'Generative AI Engineer',
+      'AI/ML Engineer',
+      'Full Stack Developer',
+      'RAG Pipeline Architect',
+      'Agentic AI Systems'
+    ],
+    typeSpeed: 60,
+    backSpeed: 35,
+    backDelay: 1800,
     loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        slidesPerGroup: 1
-      },
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-        slidesPerGroup: 2
-      },
-      1200: {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        slidesPerGroup: 4
-      }
+    showCursor: true,
+    cursorChar: '|'
+  });
+}
+
+/* ================================================
+   4. STAT COUNTERS (IntersectionObserver)
+================================================ */
+function animCounter(el) {
+  const target  = parseInt(el.dataset.target, 10);
+  const suffix  = el.dataset.suffix || '';
+  const step    = target / 60;
+  let current   = 0;
+  const iv = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current) + suffix;
+    if (current >= target) clearInterval(iv);
+  }, 20);
+}
+
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animCounter(entry.target);
+      counterObs.unobserve(entry.target);
     }
   });
+}, { threshold: 0.5 });
 
+document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
 
-    /**
-   * Horizontal Scroll Progress Bar
-   */
-  const scrollContainer = document.querySelector('.portfolio-scroller');
-  const progressBar = document.querySelector('.progress-bar');
+/* ================================================
+   5. SCROLL REVEAL (IntersectionObserver)
+================================================ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
 
-  if (scrollContainer && progressBar) {
-    scrollContainer.addEventListener('scroll', () => {
-      const scrollableWidth = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-      const scrollPercent = (scrollContainer.scrollLeft / scrollableWidth) * 100;
-      progressBar.style.width = scrollPercent + '%';
+document.querySelectorAll('.reveal, .timeline-item, .project-card, .skill-group').forEach(el => {
+  revealObs.observe(el);
+});
+
+/* ================================================
+   6. THREE.JS GLOBE
+================================================ */
+(function initGlobe() {
+  const canvas = document.getElementById('globe-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const isMobile = () => window.innerWidth < 600;
+  const getSize  = () => Math.min(window.innerWidth * (isMobile() ? 0.88 : 0.65), 600);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  let sz = getSize();
+  renderer.setSize(sz, sz);
+  canvas.style.width  = sz + 'px';
+  canvas.style.height = sz + 'px';
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.z = 2.2;
+
+  // Wireframe sphere
+  const globe = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 32, 32),
+    new THREE.MeshBasicMaterial({ color: 0x00c8ff, wireframe: true, transparent: true, opacity: 0.15 })
+  );
+  scene.add(globe);
+
+  // Surface points
+  const ptGeo = new THREE.BufferGeometry();
+  const pos   = new Float32Array(600 * 3);
+  for (let i = 0; i < 600; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi   = Math.acos(2 * Math.random() - 1);
+    pos[i * 3]     = Math.sin(phi) * Math.cos(theta);
+    pos[i * 3 + 1] = Math.sin(phi) * Math.sin(theta);
+    pos[i * 3 + 2] = Math.cos(phi);
+  }
+  ptGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  scene.add(new THREE.Points(ptGeo, new THREE.PointsMaterial({
+    color: 0x00ffa3, size: 0.022, transparent: true, opacity: 0.7
+  })));
+
+  // Orbit rings
+  for (let i = 0; i < 3; i++) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(1.1 + i * 0.08, 0.003, 8, 120),
+      new THREE.MeshBasicMaterial({ color: 0x7b2fff, transparent: true, opacity: 0.2 - i * 0.05 })
+    );
+    ring.rotation.x = Math.PI / 2 + i * 0.5;
+    ring.rotation.y = i * 0.8;
+    scene.add(ring);
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    globe.rotation.y += 0.003;
+    globe.rotation.x += 0.001;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    sz = getSize();
+    renderer.setSize(sz, sz);
+    canvas.style.width  = sz + 'px';
+    canvas.style.height = sz + 'px';
+  });
+})();
+
+/* ================================================
+   7. BACKGROUND PARTICLE FIELD
+================================================ */
+(function initParticles() {
+  const bgCanvas = document.getElementById('bg-canvas');
+  if (!bgCanvas) return;
+
+  const ctx = bgCanvas.getContext('2d');
+  const isMob = () => window.innerWidth < 600;
+  let W, H;
+
+  function resize() {
+    W = bgCanvas.width  = window.innerWidth;
+    H = bgCanvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COUNT = isMob() ? 50 : 110;
+  const pts = Array.from({ length: COUNT }, () => ({
+    x:  Math.random() * window.innerWidth,
+    y:  Math.random() * window.innerHeight,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    r:  Math.random() * 1.3 + 0.3,
+    a:  Math.random() * 0.4 + 0.1
+  }));
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    pts.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0)  p.x = W;
+      if (p.x > W)  p.x = 0;
+      if (p.y < 0)  p.y = H;
+      if (p.y > H)  p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,200,255,${p.a})`;
+      ctx.fill();
     });
-  }
 
-  /* ================================================
-     DARK / LIGHT MODE TOGGLE
-  ================================================ */
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const html = document.documentElement;
-
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  html.setAttribute('data-theme', savedTheme);
-  updateThemeIcon(savedTheme);
-
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      updateThemeIcon(next);
-    });
-  }
-
-  function updateThemeIcon(theme) {
-    if (!themeIcon) return;
-    if (theme === 'dark') {
-      themeIcon.className = 'bi bi-sun-fill';
-    } else {
-      themeIcon.className = 'bi bi-moon-stars-fill';
-    }
-  }
-
-  /* ================================================
-     NEURAL NETWORK ANIMATION — ENHANCED
-  ================================================ */
-  const canvas = document.getElementById('heroCanvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let mouse = { x: null, y: null };
-    const PARTICLE_COUNT = 120;
-    const CONNECTION_DISTANCE = 160;
-    const MOUSE_REPEL_DISTANCE = 120;
-    const PARTICLE_SPEED = 0.5;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    function getThemeColors() {
-      const isDark = document.documentElement
-        .getAttribute('data-theme') !== 'light';
-      return {
-        particle: isDark
-          ? 'rgba(139, 92, 246,'
-          : 'rgba(139, 92, 246,',
-        line: isDark
-          ? 'rgba(139, 92, 246,'
-          : 'rgba(139, 92, 246,',
-        nodeBright: isDark
-          ? 'rgba(196, 181, 253,'
-          : 'rgba(139, 92, 246,'
-      };
-    }
-
-    class Particle {
-      constructor() { this.reset(); }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * PARTICLE_SPEED;
-        this.vy = (Math.random() - 0.5) * PARTICLE_SPEED;
-        this.baseRadius = Math.random() * 2.5 + 1;
-        this.radius = this.baseRadius;
-        this.opacity = Math.random() * 0.4 + 0.4;
-        this.pulseSpeed = Math.random() * 0.02 + 0.01;
-        this.pulseOffset = Math.random() * Math.PI * 2;
-        this.isNode = Math.random() < 0.15;
-      }
-
-      update(time) {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-        this.radius = this.baseRadius +
-          Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.8;
-
-        if (mouse.x !== null) {
-          const dx = this.x - mouse.x;
-          const dy = this.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MOUSE_REPEL_DISTANCE) {
-            const force = (MOUSE_REPEL_DISTANCE - dist) / MOUSE_REPEL_DISTANCE;
-            this.x += (dx / dist) * force * 2;
-            this.y += (dy / dist) * force * 2;
-          }
-        }
-      }
-
-      draw(colors) {
-        if (this.isNode) {
-          const gradient = ctx.createRadialGradient(
-            this.x, this.y, 0,
-            this.x, this.y, this.radius * 4
-          );
-          gradient.addColorStop(0, `${colors.nodeBright}${this.opacity})`);
-          gradient.addColorStop(1, `${colors.particle}0)`);
+    const connDist = isMob() ? 75 : 115;
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x;
+        const dy = pts[i].y - pts[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy);
+        if (d < connDist) {
           ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius * 4, 0, Math.PI * 2);
-          ctx.fillStyle = gradient;
-          ctx.fill();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(0,200,255,${0.06 * (1 - d / connDist)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
         }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
+/* ================================================
+   8. NEURAL NETWORK CANVAS (About section)
+================================================ */
+(function initNeural() {
+  // Draw animated neural net on the about section background
+  const aboutSection = document.getElementById('about');
+  if (!aboutSection) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'neural-canvas';
+  canvas.style.cssText = `
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; z-index:0; opacity:0.18;
+  `;
+  aboutSection.style.position = 'relative';
+  aboutSection.insertBefore(canvas, aboutSection.firstChild);
+
+  const ctx = canvas.getContext('2d');
+
+  function resizeNeural() {
+    canvas.width  = aboutSection.offsetWidth;
+    canvas.height = aboutSection.offsetHeight;
+  }
+  resizeNeural();
+  window.addEventListener('resize', resizeNeural);
+
+  const layers = [3, 5, 4, 2];
+  function draw(t) {
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    if (W === 0 || H === 0) { requestAnimationFrame(draw); return; }
+
+    const lx = [W * 0.12, W * 0.38, W * 0.64, W * 0.88];
+    const nodes = [];
+    layers.forEach((count, li) => {
+      for (let i = 0; i < count; i++) {
+        nodes.push({ x: lx[li], y: (H / (count + 1)) * (i + 1), layer: li, pulse: i * 1.3 + li * 0.7 });
+      }
+    });
+
+    // Connections
+    nodes.forEach(n => {
+      nodes.filter(m => m.layer === n.layer + 1).forEach(m => {
+        const a = 0.05 + 0.04 * Math.sin(t * 0.002 + n.pulse);
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `${colors.particle}${this.opacity})`;
-        ctx.fill();
-      }
-    }
-
-    function drawConnections(colors) {
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < CONNECTION_DISTANCE) {
-            const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.5;
-            const bothNodes = particles[i].isNode && particles[j].isNode;
-
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `${colors.line}${opacity})`;
-            ctx.lineWidth = bothNodes ? 1.5 : 0.6;
-            ctx.stroke();
-
-            if (bothNodes && Math.random() < 0.001) {
-              const midX = (particles[i].x + particles[j].x) / 2;
-              const midY = (particles[i].y + particles[j].y) / 2;
-              ctx.beginPath();
-              ctx.arc(midX, midY, 2, 0, Math.PI * 2);
-              ctx.fillStyle = `${colors.nodeBright}0.9)`;
-              ctx.fill();
-            }
-          }
-        }
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    let time = 0;
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const colors = getThemeColors();
-      time++;
-      particles.forEach(function(p) { p.update(time); });
-      drawConnections(colors);
-      particles.forEach(function(p) { p.draw(colors); });
-      requestAnimationFrame(animate);
-    }
-
-    canvas.addEventListener('mousemove', function(e) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-
-    canvas.addEventListener('mouseleave', function() {
-      mouse.x = null;
-      mouse.y = null;
-    });
-
-    resizeCanvas();
-    initParticles();
-    animate();
-
-    window.addEventListener('resize', function() {
-      resizeCanvas();
-      initParticles();
-    });
-  }
-
-  /* ================================================
-     SCROLL REVEAL ANIMATIONS
-  ================================================ */
-  const revealElements = document.querySelectorAll(
-    '.education-item, .split-view-container, ' +
-    '.services-block, .journal-info, ' +
-    '.portfolio-slide, .section-title'
-  );
-
-  revealElements.forEach(function(el) {
-    el.classList.add('reveal');
-  });
-
-  const revealObserver = new IntersectionObserver(
-    function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
+        ctx.moveTo(n.x, n.y);
+        ctx.lineTo(m.x, m.y);
+        ctx.strokeStyle = `rgba(0,200,255,${a})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
       });
-    },
-    { threshold: 0.15 }
-  );
+    });
 
-  revealElements.forEach(function(el) {
-    revealObserver.observe(el);
-  });
+    // Nodes
+    nodes.forEach(n => {
+      const glow = 0.4 + 0.3 * Math.sin(t * 0.003 + n.pulse);
+      const r = 5;
+      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3);
+      g.addColorStop(0, `rgba(0,200,255,${glow})`);
+      g.addColorStop(1, 'rgba(0,200,255,0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r * 3, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
 
-  /* ================================================
-     STATS COUNTER ANIMATION
-  ================================================ */
-  const statNumbers = document.querySelectorAll('.hero-stat-number');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,200,255,${0.8 + 0.2 * Math.sin(t * 0.003 + n.pulse)})`;
+      ctx.fill();
+    });
 
-  function animateCounter(el) {
-    const text = el.textContent;
-    const target = parseInt(text);
-    const suffix = text.replace(/[0-9]/g, '');
-    let current = 0;
-    const increment = target / 50;
-    const timer = setInterval(function() {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      el.textContent = Math.floor(current) + suffix;
-    }, 30);
+    requestAnimationFrame(draw);
   }
+  requestAnimationFrame(draw);
+})();
 
-  const statsObserver = new IntersectionObserver(
-    function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          statNumbers.forEach(animateCounter);
-          statsObserver.disconnect();
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
+/* ================================================
+   9. 3D CARD TILT (desktop only)
+================================================ */
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.exp-card, .project-card, .edu-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
 
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) statsObserver.observe(heroStats);
+/* ================================================
+   10. READ MORE / READ LESS (Experience)
+================================================ */
+document.querySelectorAll('.read-more-btn').forEach(btn => {
+  btn.addEventListener('click', function () {
+    const card  = this.closest('.exp-card');
+    const extra = card.querySelector('.bullets-extra');
+    if (!extra) return;
+    const isOpen = extra.classList.contains('open');
+    extra.classList.toggle('open');
+    this.setAttribute('aria-expanded', String(!isOpen));
+    this.innerHTML = isOpen ? 'Read More &#x2193;' : 'Read Less &#x2191;';
+  });
+});
 
-})()
+/* ================================================
+   11. NAVBAR ACTIVE STATE ON SCROLL
+================================================ */
+(function initNavActive() {
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links .nav-link');
+
+  if (!sections.length || !navLinks.length) return;
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => obs.observe(s));
+})();
+
+/* ================================================
+   12. SMOOTH SCROLL FOR ANCHOR LINKS
+================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});

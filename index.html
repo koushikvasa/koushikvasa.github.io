@@ -1,837 +1,687 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Koushik Vasa</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Koushik Vasa &mdash; Generative AI Engineer</title>
+  <meta name="description" content="Koushik Vasa &mdash; Generative AI Engineer specializing in RAG pipelines, agentic systems, and LLM orchestration.">
 
   <!-- Google Fonts -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://kit.fontawesome.com/ba0bf0ff7f.js" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,500,500i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <!-- Template Main CSS File -->
+  <!-- Typed.js -->
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+
+  <!-- Main CSS -->
   <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- GSAP ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
 </head>
-
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-between">
+<!-- Custom Cursor (desktop only) -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
-   
+<!-- Background Particle Canvas -->
+<canvas id="bg-canvas"></canvas>
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#education">Education</a></li>
-          <li><a class="nav-link scrollto" href="#experience">Experience</a></li>
-          <li><a class="nav-link  scrollto" href="#portfolio">Projects</a></li>
-          <li><a class="nav-link" href="assets/koushik%20vasa%20resume.pdf" download>Download My Resume</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="#hero" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#education" onclick="closeMobileMenu()">Education</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="assets/Koushik_Vasa_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-cta mobile-resume-btn" onclick="closeMobileMenu()">Download Resume</a>
+</div>
 
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-        <i class="bi bi-sun-fill" id="themeIcon"></i>
-      </button>
+<!-- ===== NAV ===== -->
+<nav id="navbar">
+  <ul class="nav-links">
+    <li><a href="#hero" class="nav-link active">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#experience" class="nav-link">Experience</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <a href="assets/Koushik_Vasa_Resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-cta">Download Resume</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="globe-canvas"></canvas>
+
+  <div class="hero-inner">
+    <h1 class="hero-title">Koushik <span>Vasa</span></h1>
+
+    <div class="hero-typewriter">
+      <span id="typewriter"></span>
+    </div>
+
+    <p class="hero-subtitle">
+      5+ years building production-grade agentic systems end-to-end &mdash;
+      RAG pipelines, multi-agent orchestration, and inference optimization
+      across healthcare and B2B SaaS.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num" data-target="5" data-suffix="+">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="8" data-suffix="+">0</div>
+        <div class="stat-label">Projects Shipped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="13" data-suffix="">0</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="3" data-suffix="">0</div>
+        <div class="stat-label">Companies</div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
+  <!-- IDE Status Bar -->
+  <div class="ide-status-bar" aria-label="Availability status">
+    <span class="status-dot"></span>
+    <span class="status-item">OPEN TO WORK</span>
+    <span class="status-sep">&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>
+    <span class="status-item">&#x1F4CD; Hauppauge, NY</span>
+    <span class="status-sep">&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>
+    <span class="status-item">&#x2713; OPT Work Authorized</span>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left: Photo + floating badges -->
+      <div class="about-visual reveal">
+        <div class="photo-wrapper">
+          <img src="assets/img/koushik.jpg" alt="Koushik Vasa" class="about-photo">
+        </div>
+      </div>
+
+      <!-- Right: Bio -->
+      <div class="about-text reveal">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">Building AI that <span>works</span> in production</h2>
+        <p>I build AI systems that don&rsquo;t just demo well &mdash; they ship, scale, and hold up in production.</p>
+        <p>With 5+ years across Generative AI, RAG pipelines, and multi-agent systems, I&rsquo;ve worked as the sole AI engineer at Bridge AI and previously at Capgemini and CitiusTech, spanning B2B SaaS and healthcare.</p>
+        <p>I&rsquo;m comfortable across the full stack from embeddings and FastAPI to React and prompt orchestration, and I care deeply about latency, reliability, and systems that actually move the needle.</p>
+        <div class="tech-pills">
+          <span class="pill">Claude API</span>
+          <span class="pill">LangGraph</span>
+          <span class="pill">DSPy</span>
+          <span class="pill">RAG</span>
+          <span class="pill">FastAPI</span>
+          <span class="pill">Azure OpenAI</span>
+          <span class="pill">pgvector</span>
+          <span class="pill">Docker</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Academic</div>
+      <h2 class="section-title">Edu<span>cation</span></h2>
+    </div>
+    <div class="education-list">
+
+      <div class="edu-card reveal">
+        <div class="edu-header">
+          <div>
+            <div class="edu-school">George Mason University</div>
+            <div class="edu-degree">Master of Science in Computer Science (Machine Learning)</div>
+          </div>
+          <div class="edu-date">Jan 2024 &ndash; Dec 2025</div>
+        </div>
+        <div class="edu-gpa">GPA: <span>3.87</span></div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-header">
+          <div>
+            <div class="edu-school">SRM University AP, India</div>
+            <div class="edu-degree">Bachelor of Technology in Computer Science and Engineering, Machine Learning</div>
+          </div>
+          <div class="edu-date">Jun 2019 &ndash; May 2023</div>
+        </div>
+        <div class="edu-gpa">GPA: <span>3.6</span></div>
+      </div>
 
     </div>
-  </header><!-- End Header -->
+  </div>
+</section>
 
-  <!-- ======= Hero Section ======= -->
-   <div id="hero" class="home">
-    <canvas id="heroCanvas"></canvas>
-    <div class="container" style="position:relative; z-index:1;">
-      <div class="hero-content">
-        <div class="hero-badges">
-          <span class="hero-badge badge-available">
-            <i class="bi bi-circle-fill"></i>
-            Available for Full-Time Roles
-          </span>
-          <span class="hero-badge badge-location">
-            <i class="bi bi-geo-alt-fill"></i>
-            New York City, NY
-          </span>
-          <span class="hero-badge badge-work">
-            <i class="bi bi-patch-check-fill"></i>
-            OPT Work Authorized
-          </span>
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Career</div>
+      <h2 class="section-title">Work <span>Experience</span></h2>
+    </div>
+    <div class="timeline">
+
+      <!-- Bridge AI -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot active"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">AI/ML Engineer</div>
+              <div class="exp-company">Bridge AI &middot; USA</div>
+            </div>
+            <div class="exp-date">Aug 2025 &ndash; Present</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built <strong>Bridgette</strong>, an agentic AI assistant for a B2B marketplace, replacing a 10+ step workflow (search &rarr; filter &rarr; invite &rarr; negotiate) with a single conversational interface.</li>
+            <li>Designed a multi-step tool-calling agent using <strong>Claude (Anthropic API)</strong> and DSPy for structured prompt optimization and execution control.</li>
+            <li>Designed agent decision framework enabling autonomous execution across retrieval, structured queries, and response generation.</li>
+          </ul>
+          <ul class="exp-bullets bullets-extra">
+            <li>Architected production <strong>dual-agent system</strong> (companies vs. experts) supporting workflows such as expert matching, engagement creation, and earnings analysis via natural language.</li>
+            <li>Developed 8 production-grade tool schemas with strict runtime validation (Zod), ensuring reliable execution across agent decision and tool-calling layers.</li>
+            <li>Improved end-to-end agent task success rate from <strong>~62% to ~84%</strong> by identifying and fixing gaps across retrieval, reasoning, and execution layers.</li>
+            <li>Reduced hallucinated or incomplete responses by <strong>~25%</strong> through validation layers and fallback mechanisms, evaluated across ~500+ test queries.</li>
+            <li>Reduced average response time from <strong>~1.2s to sub-400ms</strong> via prompt optimization and query-level caching.</li>
+            <li>Sole AI engineer &mdash; owned end-to-end system design covering agent architecture, tool orchestration, backend APIs, and frontend streaming integration.</li>
+          </ul>
+          <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         </div>
-        <h1>I'm <span class="typed" data-typed-items="Koushik Vasa, an AI/ML Engineer, a Full-Stack Developer, a Gen AI Specialist"></span></h1>
-        <p>Building intelligent systems that work in the real world</p>
+      </div>
 
-        <ul class="list-unstyled list-social">
-          <li>
-            <a href="https://www.linkedin.com/in/koushik-vasa-b595b01a3" target="_blank">
-              <i class="bi bi-linkedin"></i>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/koushikvasa" target="_blank">
-              <i class="bi bi-github"></i>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:vasakoushik@gmail.com">
-              <i class="bi bi-envelope"></i>
-            </a>
-          </li>
-        </ul>
+      <!-- Capgemini -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">AI Engineer</div>
+              <div class="exp-company">Capgemini &middot; India</div>
+            </div>
+            <div class="exp-date">Apr 2021 &ndash; Dec 2023</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built <strong>document intelligence platform</strong> using hybrid RAG (Azure OpenAI + BM25), replacing manual document review for ~120 internal users across multiple teams.</li>
+            <li>Improved retrieval accuracy for enterprise document queries by <strong>~32%</strong> by combining dense embeddings with BM25 re-ranking across 500K+ unstructured documents.</li>
+            <li>Designed <strong>LangGraph-based pipelines</strong> with clear separation of retrieval, reasoning, and response generation, improving response reliability by ~35%.</li>
+          </ul>
+          <ul class="exp-bullets bullets-extra">
+            <li>Developed FastAPI inference services handling <strong>200+ concurrent requests</strong> with consistent sub-second response times.</li>
+            <li>Introduced confidence-based validation and context filtering that reduced hallucinated or irrelevant responses by <strong>~27%</strong> based on internal evaluation benchmarks.</li>
+            <li>Cut inference latency by <strong>~40%</strong> through prompt compression, caching, and retrieval pre-filtering.</li>
+            <li>Containerized services using Docker and implemented CI/CD pipelines, reducing deployment time from hours to <strong>~15 minutes</strong>.</li>
+          </ul>
+          <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
+        </div>
+      </div>
 
-        <div class="hero-btns">
-          <a href="#portfolio" class="hero-btn-primary scrollto">
-            View My Work
+      <!-- CitiusTech -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Machine Learning Engineer</div>
+              <div class="exp-company">CitiusTech Healthcare Technology Pvt. Ltd. &middot; India</div>
+            </div>
+            <div class="exp-date">Aug 2019 &ndash; Mar 2021</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built Python/SQL pipelines processing <strong>1M+ patient and claims records</strong>, reducing data preparation time by ~30% for downstream ML workflows.</li>
+            <li>Developed 30-day hospital readmission prediction models using <strong>XGBoost and Random Forest</strong>, achieving ~82% AUC and enabling early identification of high-risk patients.</li>
+            <li>Applied PCA and domain-driven feature engineering on clinical and claims data, improving model F1-score by <strong>~12%</strong> and reducing feature dimensionality by ~40%.</li>
+          </ul>
+          <ul class="exp-bullets bullets-extra">
+            <li>Resolved recurring pipeline failures including data inconsistencies and job timeouts, reducing failure rates by <strong>~35%</strong> while consistently meeting SLA timelines.</li>
+          </ul>
+          <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Work</div>
+      <h2 class="section-title">Featured <span>Projects</span></h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- 1. Sonus -->
+      <div class="project-card reveal">
+        <div class="project-tag">Clinical AI</div>
+        <div class="project-name">Sonus</div>
+        <p class="project-desc">AI-powered clinical voice intake for hospitals. Conducts structured pre-consultation interviews with patients, capturing symptoms and clinical context, then generates formatted SOAP notes ready for physicians.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Next.js 16</span>
+          <span class="stack-tag">TypeScript</span>
+          <span class="stack-tag">Tailwind CSS</span>
+          <span class="stack-tag">Vapi</span>
+          <span class="stack-tag">Claude Sonnet</span>
+          <span class="stack-tag">Tavily</span>
+        </div>
+        <div class="project-links">
+          <a href="https://sonus-li94.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Live Demo</a>
+        </div>
+      </div>
+
+      <!-- 2. ClearCare -->
+      <div class="project-card reveal">
+        <div class="project-tag">Generative AI</div>
+        <div class="project-name">ClearCare</div>
+        <p class="project-desc">AI Medicare Cost Navigator with a LangGraph 8-node multi-agent pipeline mapping patient symptoms to procedures and calculating real out-of-pocket costs across 2.8M+ CMS NPI providers.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Next.js 14</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">LangGraph</span>
+          <span class="stack-tag">GPT-4o</span>
+          <span class="stack-tag">ElevenLabs</span>
+          <span class="stack-tag">Supabase</span>
+        </div>
+        <div class="project-links">
+          <a href="https://clearcare-orpin.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Live Demo</a>
+          <a href="https://github.com/koushikvasa/clearcare" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 3. MediConnect -->
+      <div class="project-card reveal">
+        <div class="project-tag">AI Platform</div>
+        <div class="project-name">MediConnect</div>
+        <p class="project-desc">Full-stack AI platform matching patients to 2.8M+ providers in under 500ms using custom stream processing over a 704MB dataset, with 3D anatomy explorer and geolocation-based specialist ranking.</p>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">Gemini 2.5 Flash</span>
+          <span class="stack-tag">SQLite</span>
+          <span class="stack-tag">Supabase</span>
+          <span class="stack-tag">Three.js</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/mediconnect" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 4. CitationSleuth -->
+      <div class="project-card reveal">
+        <div class="project-tag">RAG System</div>
+        <div class="project-name">CitationSleuth</div>
+        <p class="project-desc">Dual-layer LLM validation combining semantic retrieval and Neo4j graph traversal to detect hallucinations across 1,000+ HaluEval benchmark samples, with real-time Streamlit interface enforcing 0.7+ similarity thresholds.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Neo4j</span>
+          <span class="stack-tag">HuggingFace</span>
+          <span class="stack-tag">Streamlit</span>
+          <span class="stack-tag">Semantic Similarity</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/CitationSlueth" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 5. Hospital Readmissions -->
+      <div class="project-card reveal">
+        <div class="project-tag">Machine Learning</div>
+        <div class="project-name">Predicting Hospital Readmissions</div>
+        <p class="project-desc">ML classification pipeline predicting 30-day hospital readmissions for diabetic patients trained on 100,000+ records, applying PCA for dimensionality reduction with measurable evaluation metrics.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">XGBoost</span>
+          <span class="stack-tag">Random Forest</span>
+          <span class="stack-tag">PCA</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/Predicting-Hospital-Readmissions-for-Diabetic-Patients" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 6. Car Temperature -->
+      <div class="project-card reveal">
+        <div class="project-tag">Machine Learning</div>
+        <div class="project-name">Car Temperature Analysis</div>
+        <p class="project-desc">Comparative ML pipeline evaluating KNN, Decision Tree, and Random Forest to forecast in-car temperature, achieving R&sup2; of 0.9997 with Random Forest using thermal imaging and augmentation for a hardware-free system.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">KNN</span>
+          <span class="stack-tag">Random Forest</span>
+          <span class="stack-tag">Decision Tree</span>
+          <span class="stack-tag">Thermal Imaging</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/Car-temperature-analysis" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 7. APSWC Portal -->
+      <div class="project-card reveal">
+        <div class="project-tag">Web Development</div>
+        <div class="project-name">APSWC Government Portal</div>
+        <p class="project-desc">10+ dynamic UI pages for the Andhra Pradesh State Warehousing Corporation government portal achieving 25% faster page load speeds, full mobile responsiveness, and improved backend data access.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Angular</span>
+          <span class="stack-tag">Bootstrap</span>
+          <span class="stack-tag">HTML5</span>
+          <span class="stack-tag">CSS3</span>
+          <span class="stack-tag">SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/APSWC-Website.git" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 8. Travel Advisor -->
+      <div class="project-card reveal">
+        <div class="project-tag">Web Application</div>
+        <div class="project-name">Travel Advisor</div>
+        <p class="project-desc">Full-stack travel planning app integrating Google Maps, OpenWeather, and TripAdvisor APIs using React.js, handling 500+ monthly requests with reliable concurrent data fetching and client-side state management.</p>
+        <div class="project-stack">
+          <span class="stack-tag">React.js</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Google Maps API</span>
+          <span class="stack-tag">OpenWeather API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/koushikvasa/TravelAdvisor.git" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+        </div>
+      </div>
+
+      <!-- 9. Urban Pool -->
+      <div class="project-card reveal">
+        <div class="project-tag">UI/UX Design</div>
+        <div class="project-name">Urban Pool</div>
+        <p class="project-desc">Complete UI/UX design and prototype for a modern carpooling application, focusing on intuitive user flows, scalable component architecture, and a clean mobile-first visual interface.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Figma</span>
+        </div>
+        <div class="project-links">
+          <a href="https://www.figma.com/file/Eqykd3KmR6OuDMiJ9ZjEMb/Car?node-id=0%3A1" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Figma</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Expertise</div>
+      <h2 class="section-title">Technical <span>Skills</span></h2>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Generative AI &amp; LLMs</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Agentic AI</span>
+          <span class="skill-tag">RAG (Hybrid/Re-Ranking)</span>
+          <span class="skill-tag">Embeddings</span>
+          <span class="skill-tag">Semantic Search</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">Tool Calling</span>
+          <span class="skill-tag">Agent Orchestration</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">LLM Frameworks &amp; Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LangChain</span>
+          <span class="skill-tag">LangGraph</span>
+          <span class="skill-tag">DSPy</span>
+          <span class="skill-tag">Azure OpenAI</span>
+          <span class="skill-tag">Anthropic Claude</span>
+          <span class="skill-tag">Hugging Face</span>
+          <span class="skill-tag">OpenAI API</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">ML &amp; Data Science</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">Feature Engineering</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">Random Forest</span>
+          <span class="skill-tag">BERT</span>
+          <span class="skill-tag">PCA</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Cloud &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Azure ML</span>
+          <span class="skill-tag">Azure AI Search</span>
+          <span class="skill-tag">Azure Databricks</span>
+          <span class="skill-tag">AWS S3</span>
+          <span class="skill-tag">AWS Lambda</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Vercel</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Backend &amp; Data</div>
+        <div class="skill-tags">
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">pgvector</span>
+          <span class="skill-tag">RBAC</span>
+          <span class="skill-tag">OAuth</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Node.js</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Vue.js</span>
+          <span class="skill-tag">Angular</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">Tailwind CSS</span>
+          <span class="skill-tag">Framer Motion</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Design &amp; Other</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">UX Design</span>
+          <span class="skill-tag">Agile</span>
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">Data Structures</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CERTIFICATIONS ===== -->
+<section id="certifications">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifi<span>cations</span></h2>
+    </div>
+
+    <div class="certs-groups">
+
+      <!-- AI & ML -->
+      <div class="cert-group reveal">
+        <div class="cert-group-label">AI &amp; ML</div>
+        <div class="cert-badges">
+          <a href="https://www.credly.com/badges/a8180fef-de55-48de-9c0f-35315bb23914/public_url" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Generative AI with LLMs &mdash; NVIDIA &middot; Jan 2026</span>
+            <span class="cert-ext">&#x2197;</span>
           </a>
-          <a href="assets/koushik%20vasa%20resume.pdf" class="hero-btn-secondary" download>
-            Download Resume
+          <a href="https://credentials.databricks.com/ce240459-c193-448c-8000-8b8f474b02a1" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Generative AI Fundamentals &mdash; Databricks &middot; Aug 2024</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
+          <a href="https://courses.cognitiveclass.ai/certificates/9b34c6b98779422e98d4e527bae862b2" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Prompt Engineering for Everyone &mdash; IBM &middot; Aug 2024</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
+          <a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Agentforce Specialist &mdash; Salesforce &middot; Dec 2025</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
+          <a href="https://www.linkedin.com/learning/certificates/7e480352de058d0ede709dd12a041cbcb1fdfe17d5c0eafd0f3401e5c44d3e18" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Career Essentials in Generative AI &mdash; Microsoft &amp; LinkedIn &middot; Jul 2023</span>
+            <span class="cert-ext">&#x2197;</span>
           </a>
         </div>
+      </div>
 
-        <div class="hero-stats">
-          <div class="hero-stat-item">
-            <span class="hero-stat-number">2+</span>
-            <span class="hero-stat-label">Years Experience</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-number">8+</span>
-            <span class="hero-stat-label">Projects Shipped</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-number">13</span>
-            <span class="hero-stat-label">Certifications</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-number">3</span>
-            <span class="hero-stat-label">Internships</span>
-          </div>
+      <!-- Cloud & Data -->
+      <div class="cert-group reveal">
+        <div class="cert-group-label">Cloud &amp; Data</div>
+        <div class="cert-badges">
+          <a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Microsoft Fabric Analytics Engineer Associate &mdash; Microsoft &middot; Jan 2026</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
+          <a href="https://brm-certview.oracle.com/ords/certview/ecertificate?ssn=OC5265271&trackId=OCI24AICFA&key=0ae6736740ad910ee0d56fe7eba4c696b7279212" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">OCI 2024 AI Foundations Associate &mdash; Oracle &middot; Oct 2024</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
-<!-- End Hero -->
 
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <div id="about" class="paddsection">
-      <div class="container">
-        <div class="row justify-content-between">
-
-          <div class="col-lg-4 ">
-            <div class="div-img-bg">
-              <div class="about-img">
-                <img src="assets/img/me.jpg" class="img-responsive" alt="me">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-7">
-            <div class="about-descr">
-
-              <p class="p-heading">I am a <strong>AI/ML Engineer</strong> and <strong>Full-Stack Developer</strong> focused on shipping production AI systems. With an MS in Machine Learning from George Mason University and hands-on experience building RAG pipelines, LLM agents, and scalable AI infrastructure, I specialize in turning research-grade models into reliable, user-facing applications.</p>
-              <p class="separator">My work spans the full stack — from embedding pipelines and prompt orchestration to React frontends and FastAPI backends. I have built and deployed multi-agent systems, fact-checking RAG architectures, and AI-powered platforms handling millions of provider records, always with a focus on inference reliability, latency optimization, and measurable real-world impact.</p>
-            </div>
-
-          </div>
+      <!-- Web & Design -->
+      <div class="cert-group reveal">
+        <div class="cert-group-label">Web &amp; Design</div>
+        <div class="cert-badges">
+          <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XVN87DK68B7A" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Full-Stack Web Development with React &mdash; Coursera &middot; Jun 2022</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
+          <a href="https://www.coursera.org/account/accomplishments/certificate/XQGVBDG85A5A" target="_blank" rel="noopener noreferrer" class="cert-badge">
+            <span class="cert-dot"></span>
+            <span class="cert-badge-text">Foundations of UX Design &mdash; Coursera &middot; Jun 2021</span>
+            <span class="cert-ext">&#x2197;</span>
+          </a>
         </div>
       </div>
-    </div><!-- End About Section -->
-    
-    <!-- ======= Education Section ======= -->
-    <div id="education" class="paddsection" style="background: #f7f7f7;">
-        <div class="container">
-            <div class="section-title text-center">
-                <h2>Education</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="education-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h4><strong>George Mason University</strong></h4>
-                                <p>Master's in computer science, Machine Learning</p>
-                            </div>
-                            <div class="col-md-4 text-md-end">
-                                <span class="period">Jan 2024 - Dec 2025</span>
-                            </div>
-                        </div>
-                        <p class="gpa"><strong>GPA: 3.87</strong></p>
-                    </div>
-                    <div class="education-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h4><strong>SRM University AP, India</strong></h4>
-                                <p>Bachelor of Technology in Computer Science and Engineering, Machine learning</p>
-                            </div>
-                            <div class="col-md-4 text-md-end">
-                                <span class="period">Jun 2019 - May 2023</span>
-                            </div>
-                        </div>
-                        <p class="gpa"><strong>GPA: 3.6</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!-- End Education Section -->
-    
-    <!-- ======= Experience Section ======= -->
-     <div id="experience" class="paddsection" style="background: #f7f7f7;">
-    <div class="container">
-        <div class="section-title text-center">
-            <h2>Experience</h2>
-        </div>
 
-        <div class="split-view-container">
-            <div class="split-view-nav">
-                <ul>
-                    <li class="active" data-target="job-bridgenow">
-                        <h4>AI Engineer</h4>
-                        <span>BridgeNow AI</span>
-                    </li>
-                    <li data-target="job-cyware">
-                        <h4>AI Software Engineering Intern</h4>
-                        <span>Cyware Labs</span>
-                    </li>
-                    <li data-target="job-genai">
-                        <h4>AI Engineering Intern</h4>
-                        <span>Gen AI Pioneer</span>
-                    </li>
-                    <li data-target="job-codetree">
-                        <h4>Web Development Intern</h4>
-                        <span>Code Tree Software</span>
-                    </li>
-                    <li data-target="job-srm">
-                        <h4>Technical Lead</h4>
-                        <span>SRM Innovation Cell</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="split-view-content">
-                <div class="split-view-panel active" id="job-bridgenow">
-                    <h3>AI Engineer <span class="company">@ BridgeNow AI</span></h3>
-                    <span class="period">Feb 2026 – Present</span>
-                    <ul>
-                        <li>Architected and shipped Bridgette, a production RAG pipeline backed by LangChain orchestration and semantic search over vector embeddings that intelligently matches users to domain experts at scale, owning full system design from intake through match delivery.</li>
-                        <li>Designed the end-to-end agent architecture including embedding pipelines, retrieval optimization, and API integration layers, ensuring low-latency inference and reliable LLM output across production workflows.</li>
-                        <li>Iterated rapidly on prompt orchestration strategies and LLM features in an early-stage startup environment, driving full-stack deployment from model integration to scalable backend API delivery.</li>
-                    </ul>
-                </div>
-                <div class="split-view-panel" id="job-cyware">
-                    <h3>AI Software Engineering Intern <span class="company">@ Cyware Labs</span></h3>
-                    <span class="period">Jan 2023 – Dec 2023</span>
-                    <ul>
-                        <li>Shipped a Vue 2 to Vue 3 migration across 20+ components on real-time threat intelligence dashboards used by SOC analysts, delivering a 30% performance boost and measurable latency reduction in ML-driven insight delivery.</li>
-                        <li>Resolved 150+ integration failures between frontend interfaces and backend AI services, diagnosing data pipeline bottlenecks and ensuring reliable, lag-free delivery of anomaly detection outputs to end users.</li>
-                        <li>Built Python automation pipelines that cleaned and normalized raw security logs at scale, cutting manual data preparation by 50% and improving upstream data quality for downstream ML model inference.</li>
-                    </ul>
-                </div>
-                <div class="split-view-panel" id="job-genai">
-                    <h3>AI Engineering Intern <span class="company">@ Gen AI Pioneer</span></h3>
-                    <span class="period">Jan 2022 – Dec 2022</span>
-                    <ul>
-                        <li>Designed and deployed autonomous Python-based agents to orchestrate complex multi-step NLP workflows using Hugging Face transformers, reducing manual processing time by 65% and improving end-to-end pipeline reliability across enterprise data sources.</li>
-                        <li>Fine-tuned BERT and DistilBERT models using PyTorch on domain-specific datasets, applying Scikit-learn evaluation metrics to benchmark classification accuracy and measure model reliability improvements across iterative training runs.</li>
-                        <li>Engineered and tested prompt design strategies across multiple LLM endpoints, systematically measuring response accuracy and reducing output inconsistency through structured evaluation, iteration, and controlled prompt versioning.</li>
-                    </ul>
-                </div>
-                <div class="split-view-panel" id="job-codetree">
-                    <h3>Web Development Intern <span class="company">@ Code Tree Software</span></h3>
-                    <span class="period">Jun 2021 – Aug 2021</span>
-                    <ul>
-                        <li>Architected 10+ dynamic UI pages for the Andhra Pradesh State Warehousing Corporation portal using Angular and Bootstrap, achieving 25% faster page load speeds and full mobile responsiveness.</li>
-                        <li>Enhanced digital experience for government clients, contributing to a 15% increase in user engagement and more efficient access to logistics and inventory data.</li>
-                        <li>Collaborated on the full SDLC from design to deployment, integrating features that improved backend data access with SQL databases.</li>
-                    </ul>
-                </div>
-                <div class="split-view-panel" id="job-srm">
-                    <h3>Technical Lead <span class="company">@ SRM Innovation Cell</span></h3>
-                    <span class="period">Dec 2020 – Dec 2022</span>
-                    <ul>
-                        <li>Mentored 10+ student teams on AI/ML implementation and full-stack prototyping, directly facilitating the launch of 4 campus startups and boosting technical engagement by 30%.</li>
-                        <li>Architected a resource management portal for the incubation center, reducing administrative latency by 40% and streamlining workflow for student ventures.</li>
-                        <li>Secured 7 industry partnerships providing students with mentorship and access to technical resources.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
   </div>
-<!-- End Experience Section -->
+</section>
 
-
-    <!-- ======= Services Section ======= -->
-      <div id="services">
+<!-- ===== CONTACT ===== -->
+<section id="contact">
   <div class="container">
-    <div class="section-title text-center">
-      <h2>Skills</h2>
+    <div class="reveal" style="text-align:center;">
+      <div class="section-tag" style="justify-content:center;">Contact</div>
+      <h2 class="section-title">Let&rsquo;s <span>Connect</span></h2>
     </div>
-  </div>
-  <div class="container">
-
-    <div class="services-slider swiper" data-aos="fade-up" data-aos-delay="100">
-      <div class="swiper-wrapper">
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-robot"></i>
-            <span>Machine Learning</span>
-            <p class="separator">Enabling systems to learn and improve from experience using algorithms and statistical models.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-brain"></i>
-            <span>Deep Learning</span>
-            <p class="separator">A subset of machine learning based on artificial neural networks for complex pattern recognition.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-            <span>Generative AI</span>
-            <p class="separator">AI models that can generate novel content, such as text, images, or code, based on training data.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-language"></i>
-            <span>Large Language Models</span>
-            <p class="separator">Deep learning models trained on vast text data to understand and generate human-like language.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-terminal"></i>
-            <span>Prompt Engineering</span>
-            <p class="separator">Strategically designing inputs to effectively guide AI models toward desired outputs.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-vuejs"></i>
-            <span>Vue JS</span>
-            <p class="separator">A progressive JavaScript framework for building user interfaces and single-page applications.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Nuxt JS</span>
-            <p class="separator">A high-level framework built on Vue.js for creating performant, production-ready web applications.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fab fa-react"></i>
-            <span>React JS</span>
-            <p class="separator">A JavaScript library for building dynamic user interfaces, especially for single-page applications.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fab fa-angular"></i>
-            <span>Angular JS</span>
-            <p class="separator">A structural framework for dynamic web apps that allows for the extension of HTML's syntax.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa fa-html5"></i>
-            <span>HTML 5</span>
-            <p class="separator">A markup language for structuring content on the web, forming the skeleton of all websites.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa fa-css3"></i>
-            <span>CSS 3</span>
-            <p class="separator">A stylesheet language used to describe the presentation and design of a document written in HTML.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-bootstrap"></i>
-            <span>Bootstrap</span>
-            <p class="separator">A potent front-end framework for creating modern, responsive, and mobile-first websites.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fab fa-node-js"></i>
-            <span>Node js</span>
-            <p class="separator">A server-side JavaScript run-time environment that executes JS code outside a web browser.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-python"></i>
-            <span>Python</span>
-            <p class="separator">A versatile language with extensive libraries for data science, machine learning, and web development.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-database"></i>
-            <span>SQL</span>
-            <p class="separator">A standard language for storing, manipulating, and retrieving data in relational databases.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-leaf"></i>
-            <span>Mongo DB</span>
-            <p class="separator">A document-oriented NoSQL database program used for high-volume data storage.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-cubes"></i>
-            <span>Data Structures</span>
-            <p class="separator">The fundamental constructs for organizing and storing data to enable efficient access and modification.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-object-group"></i>
-            <span>User Experience (UX)</span>
-            <p class="separator">The process of designing products that are useful, easy to use, and delightful to interact with.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-figma"></i>
-            <span>Figma</span>
-            <p class="separator">A collaborative interface design tool for creating, prototyping, and sharing user experiences.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-arrows-spin"></i>
-            <span>Agile Methodologies</span>
-            <p class="separator">An iterative approach to project management that helps teams deliver value to customers faster.</p>
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-users"></i>
-            <span>Leadership</span>
-            <p class="separator">The ability to guide, inspire, and motivate a group towards achieving a common goal.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-link"></i>
-            <span>LangChain</span>
-            <p class="separator">An orchestration framework for building LLM-powered applications and autonomous AI agent workflows.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-diagram-project"></i>
-            <span>LangGraph</span>
-            <p class="separator">A framework for building stateful multi-agent pipelines with graph-based LLM orchestration.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>RAG Pipelines</span>
-            <p class="separator">Retrieval-Augmented Generation systems combining vector search with LLM inference for reliable outputs.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-database"></i>
-            <span>Vector Databases</span>
-            <p class="separator">Specialized databases optimized for embedding storage and semantic similarity search at scale.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-bolt"></i>
-            <span>FastAPI</span>
-            <p class="separator">A high-performance Python web framework for building production-ready AI and ML backend APIs.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-react"></i>
-            <span>Next.js</span>
-            <p class="separator">A React framework for building production-grade full-stack web applications with server-side rendering.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-docker"></i>
-            <span>Docker</span>
-            <p class="separator">A containerization platform for consistent, scalable deployment of AI applications across environments.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-fire"></i>
-            <span>PyTorch</span>
-            <p class="separator">An open-source deep learning framework for building and training neural network models.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-solid fa-gears"></i>
-            <span>MLOps</span>
-            <p class="separator">Practices and tools for deploying, monitoring, and maintaining ML models reliably in production.</p>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="services-block">
-            <i class="fa-brands fa-js"></i>
-            <span>TypeScript</span>
-            <p class="separator">A strongly typed superset of JavaScript for building scalable, maintainable web applications.</p>
-          </div>
-        </div>
-        
-      </div>
-      <div class="swiper-pagination"></div>
-    </div>
-  </div>
-</div>
-
-    <!-- End Services Section -->
-
-    <div id="journal" class="text-left paddsection">
-
-  <div class="container">
-    <div class="section-title text-center">
-      <h2>Certifications</h2>
-    </div>
-  </div>
-
-  <div class="container">
-      <div class="journal-block">
-      <div class="row">
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer">Microsoft Fabric Analytics Engineer Associate</a></h4>
-              <p class="separator">Microsoft | Jan 2026</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.credly.com/badges/a8180fef-de55-48de-9c0f-35315bb23914/public_url" target="_blank" rel="noopener noreferrer">Generative AI with LLMs</a></h4>
-              <p class="separator">NVIDIA | Jan 2026</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.linkedin.com/in/koushik-vasa/details/certifications/" target="_blank" rel="noopener noreferrer">Agentforce Specialist</a></h4>
-              <p class="separator">Salesforce | Dec 2025</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://brm-certview.oracle.com/ords/certview/ecertificate?ssn=OC5265271&trackId=OCI24AICFA&key=0ae6736740ad910ee0d56fe7eba4c696b7279212" target="_blank" rel="noopener noreferrer">OCI 2024 AI Foundations Associate</a></h4>
-              <p class="separator">Oracle | Oct 2024</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://credentials.databricks.com/ce240459-c193-448c-8000-8b8f474b02a1" target="_blank" rel="noopener noreferrer">Generative AI Fundamentals</a></h4>
-              <p class="separator">Databricks | Aug 2024</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://courses.cognitiveclass.ai/certificates/9b34c6b98779422e98d4e527bae862b2" target="_blank" rel="noopener noreferrer">Prompt Engineering for Everyone</a></h4>
-              <p class="separator">IBM | Aug 2024</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.linkedin.com/learning/certificates/7e480352de058d0ede709dd12a041cbcb1fdfe17d5c0eafd0f3401e5c44d3e18" target="_blank" rel="noopener noreferrer">Career Essentials in Generative AI</a></h4>
-              <p class="separator">Microsoft &amp; LinkedIn | Jul 2023</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/XVN87DK68B7A" target="_blank" rel="noopener noreferrer">Full-Stack Web Development with React</a></h4>
-              <p class="separator">Coursera | Jun 2022</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <div class="journal-info">
-            <div class="journal-txt">
-              <h4><a href="https://www.coursera.org/account/accomplishments/certificate/XQGVBDG85A5A" target="_blank" rel="noopener noreferrer">Foundations of UX Design</a></h4>
-              <p class="separator">Coursera | Jun 2021</p>
-            </div>
-          </div>
-        </div>
-
+    <div class="contact-card reveal">
+      <p class="contact-cta">Let&rsquo;s build something <span class="grad-text">remarkable</span></p>
+      <p class="contact-sub">
+        Open to full-time roles in Generative AI Engineering, LLM Systems, and Agentic AI.<br>
+        Based in Hauppauge, NY &middot; OPT Work Authorized
+      </p>
+      <div class="contact-links">
+        <a href="mailto:koushikvasa2912@gmail.com" class="contact-link">
+          <span class="contact-icon">&#x2709;</span> koushikvasa2912@gmail.com
+        </a>
+        <a href="tel:+15714202558" class="contact-link">
+          <span class="contact-icon">&#x260E;</span> +1 (571) 420-2558
+        </a>
+        <a href="https://linkedin.com/in/koushik-vasa" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-icon">&#x2197;</span> LinkedIn
+        </a>
+        <a href="https://github.com/koushikvasa" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-icon">&#x2197;</span> GitHub
+        </a>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-    <!-- ======= Portfolio Section ======= -->
-     <div id="portfolio" class="paddsection">
+<!-- ===== FOOTER ===== -->
+<footer>
+  <span>&copy; 2026 Koushik Vasa &middot; Generative AI Engineer</span>
+</footer>
 
-  <div class="portfolio-header">
-    <div class="section-title text-center">
-      <h2>My Projects</h2>
-    </div>
-    <div class="progress-container">
-      <div class="progress-bar"></div>
-    </div>
-  </div>
-
-  <div class="portfolio-scroller">
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Generative AI</span>
-          <h2>ClearCare: AI Medicare Cost Navigator</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Next.js 14, FastAPI, LangGraph, GPT-4o, LangChain, Tavily, ElevenLabs, Supabase, Railway, Vercel</p>
-          <p class="description">Shipped a production AI application with a Next.js 14 frontend and FastAPI backend powered by a LangGraph 8-node multi-agent pipeline that maps patient symptoms to medical procedures and calculates real out-of-pocket costs across 2.8M+ CMS NPI providers, deployed end-to-end on Railway and Vercel.</p>
-          <a href="https://clearcare-orpin.vercel.app/" class="btn-view-project" target="_blank" rel="noopener noreferrer">View Live</a>
-          <a href="https://github.com/koushikvasa/clearcare" class="btn-view-project" target="_blank" rel="noopener noreferrer" style="margin-left: 10px;">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/clearcare.png" alt="ClearCare AI Medicare Cost Navigator">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>AI Platform</span>
-          <h2>MediConnect: AI Healthcare Platform</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> React, Python, FastAPI, Google Gemini API, Stream Processing</p>
-          <p class="description">Engineered a full-stack AI platform that matches patients to 2.8M+ providers in under 500ms by designing custom stream processing architecture to optimize query execution across a 704MB dataset, with measurable latency benchmarks validated at scale.</p>
-          <a href="https://github.com/koushikvasa/mediconnect" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/mediconnect.png" alt="MediConnect platform UI">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Generative AI</span>
-          <h2>CitationSleuth: Fact-Checking RAG</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, Neo4j, HuggingFace, Streamlit, Semantic Similarity</p>
-          <p class="description">Built a dual-layer RAG verification system combining semantic similarity scoring and Neo4j graph retrieval to detect and flag LLM hallucinations across 1,000+ HaluEval benchmark samples, with evaluation metrics tracked end-to-end and a real-time Streamlit interface enforcing 0.7+ similarity thresholds.</p>
-          <a href="https://github.com/koushikvasa/CitationSlueth" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/citationseluth.png" alt="CitationSleuth interface screenshot">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Machine Learning</span>
-          <h2>Predicting Hospital Readmissions</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, Scikit-learn, PCA, Decision Tree, UCI Dataset</p>
-          <p class="description">Developed an ML classification pipeline to predict 30-day hospital readmissions for diabetic patients trained on 100,000+ patient records, applying PCA for dimensionality reduction and achieving a 9% accuracy improvement on the Decision Tree model from 44% to 53% with measurable evaluation metrics.</p>
-          <a href="https://github.com/koushikvasa/Predicting-Hospital-Readmissions-for-Diabetic-Patients" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/Predict.png" alt="Data visualization graph for hospital readmissions">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Machine Learning</span>
-          <h2>Car Temperature Analysis</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Python, KNN, Random Forest, Decision Tree, Thermal Imaging</p>
-          <p class="description">Built a comparative ML pipeline evaluating KNN, Decision Tree, and Random Forest models to forecast in-car temperature from exterior variables, achieving a production-level R² score of 0.9997 with Random Forest validated through rigorous cross-evaluation, using thermal imaging and augmentation for a hardware-free prediction system.</p>
-          <a href="https://github.com/koushikvasa/Car-temperature-analysis" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/cartemp.png" alt="Car with thermal analysis overlay">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Web Development</span>
-          <h2>APSWC Government Portal</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Angular, Bootstrap, HTML5, CSS3, SQL</p>
-          <p class="description">Architected 10+ dynamic UI pages for the Andhra Pradesh State Warehousing Corporation government portal using Angular and Bootstrap, achieving 25% faster page load speeds, full mobile responsiveness, and improved backend data access for a critical government web platform serving logistics and inventory management.</p>
-          <a href="https://github.com/koushikvasa/APSWC-Website.git" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/APSWC.jpg" alt="APSWC Government Portal">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>Web Application</span>
-          <h2>Travel Advisor</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> React.js, Node.js, Google Maps API, OpenWeather API, TripAdvisor API</p>
-          <p class="description">Delivered a full-stack travel planning application integrating three external REST APIs (Google Maps, OpenWeather, TripAdvisor) using React.js, handling 500+ monthly requests with reliable concurrent data fetching and client-side state management architecture for seamless multi-API data orchestration.</p>
-          <a href="https://github.com/koushikvasa/TravelAdvisor.git" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/Traveladvisor.jpg" alt="Travel Advisor App">
-        </div>
-      </div>
-    </section>
-
-    <section class="portfolio-slide">
-      <div class="slide-content">
-        <div class="slide-text">
-          <span>UI/UX Design</span>
-          <h2>Urban Pool</h2>
-          <p class="tech-stack"><strong>Technologies:</strong> Figma</p>
-          <p class="description">Created a complete UI/UX design and prototype for a modern carpooling application, focusing on intuitive user flows, scalable component architecture, and a clean visual interface optimized for mobile-first usage patterns.</p>
-          <a href="https://www.figma.com/file/Eqykd3KmR6OuDMiJ9ZjEMb/Car?node-id=0%3A1" class="btn-view-project" target="_blank" rel="noopener noreferrer">View on Figma</a>
-        </div>
-        <div class="slide-image">
-          <img src="assets/img/portfolio/urbanpool.jpg" alt="Urban Pool App Design">
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <div class="portfolio-arrow-hint">
-    <span>More Projects</span>
-    <div class="arrow-animation">
-      <i class="bi bi-chevron-right"></i>
-      <i class="bi bi-chevron-right"></i>
-      <i class="bi bi-chevron-right"></i>
-    </div>
-  </div>
-</div>
- <!-- End Portfolio Section -->
-
-
-    <!-- ======= Contact Section ======= -->
-    <div id="contact" class="paddsection">
-      <div class="container">
-        <div class="contact-block1">
-          <div class="row">
-
-            <div class="col-lg-6">
-              <div class="contact-contact">
-
-                <h2 class="mb-30">CONTACT ME AT</h2>
-
-                <ul class="contact-details">
-                  <li>
-                    <i class="bi bi-telephone-fill"></i>
-                    <span>+1 571 420 2558</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-envelope-fill"></i>
-                    <span>vasakoushik@gmail.com</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-linkedin"></i>
-                    <a href="https://www.linkedin.com/in/koushik-vasa-b595b01a3" target="_blank">koushik-vasa</a>
-                  </li>
-                </ul>
-
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+<!-- Main JS -->
+<script src="assets/js/main.js"></script>
 </body>
-
 </html>
-
