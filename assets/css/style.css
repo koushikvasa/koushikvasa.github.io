@@ -584,11 +584,10 @@ section {
 }
 
 .edu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
   gap: 16px;
-  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 
@@ -611,11 +610,10 @@ section {
   color: var(--accent);
   letter-spacing: 0.08em;
   white-space: nowrap;
-  align-self: flex-start;
+  justify-self: end;
   background: rgba(0, 200, 255, 0.08);
   border: 1px solid rgba(0, 200, 255, 0.2);
   padding: 4px 10px;
-  flex-shrink: 0;
 }
 
 .edu-gpa {
@@ -1245,6 +1243,8 @@ footer {
   .hero-stats    { flex-wrap: wrap; }
   .hero-badge    { font-size: 0.5rem; letter-spacing: 0.06em; }
   .education-list { margin-left: 0; margin-right: 0; }
+  .edu-header    { grid-template-columns: 1fr; gap: 10px; }
+  .edu-date      { justify-self: start; }
   .cert-badge    { font-size: 0.6rem; padding: 6px 12px; }
 }
 
