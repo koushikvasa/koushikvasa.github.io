@@ -76,7 +76,7 @@ if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
 if (typeof Typed !== 'undefined' && document.getElementById('typewriter')) {
   new Typed('#typewriter', {
     strings: [
-      'Generative AI Engineer',
+      'AI Engineer',
       'AI/ML Engineer',
       'Full Stack Developer',
       'RAG Pipeline Architect',

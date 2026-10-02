@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Koushik Vasa &mdash; Generative AI Engineer</title>
-  <meta name="description" content="Koushik Vasa &mdash; Generative AI Engineer specializing in RAG pipelines, agentic systems, and LLM orchestration.">
+  <title>Koushik Vasa &mdash; AI Engineer</title>
+  <meta name="description" content="Koushik Vasa &mdash; AI Engineer building LLM agents, RAG pipelines, and healthcare AI.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,14 +72,13 @@
     </div>
 
     <p class="hero-subtitle">
-      5+ years building production-grade agentic systems end-to-end &mdash;
-      RAG pipelines, multi-agent orchestration, and inference optimization
-      across healthcare and B2B SaaS.
+      AI Engineer building LLM agents, RAG pipelines, and healthcare AI,
+      turning complex workflows into simple conversational products.
     </p>
 
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num" data-target="5" data-suffix="+">0</div>
+        <div class="stat-num" data-target="2" data-suffix="+">0</div>
         <div class="stat-label">Years Experience</div>
       </div>
       <div class="stat">
@@ -91,7 +90,7 @@
         <div class="stat-label">Certifications</div>
       </div>
       <div class="stat">
-        <div class="stat-num" data-target="3" data-suffix="">0</div>
+        <div class="stat-num" data-target="4" data-suffix="">0</div>
         <div class="stat-label">Companies</div>
       </div>
     </div>
@@ -112,7 +111,7 @@
     <span class="status-dot"></span>
     <span class="status-item">OPEN TO WORK</span>
     <span class="status-sep">&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>
-    <span class="status-item">&#x1F4CD; Hauppauge, NY</span>
+    <span class="status-item">&#x1F4CD; New York, NY</span>
     <span class="status-sep">&nbsp;&nbsp;&bull;&nbsp;&nbsp;</span>
     <span class="status-item">&#x2713; OPT Work Authorized</span>
   </div>
@@ -134,9 +133,9 @@
       <div class="about-text reveal">
         <div class="section-tag">About Me</div>
         <h2 class="section-title">Building AI that <span>works</span> in production</h2>
-        <p>I build AI systems that don&rsquo;t just demo well &mdash; they ship, scale, and hold up in production.</p>
-        <p>With 5+ years across Generative AI, RAG pipelines, and multi-agent systems, I&rsquo;ve worked as the sole AI engineer at Bridge AI and previously at Capgemini and CitiusTech, spanning B2B SaaS and healthcare.</p>
-        <p>I&rsquo;m comfortable across the full stack from embeddings and FastAPI to React and prompt orchestration, and I care deeply about latency, reliability, and systems that actually move the needle.</p>
+        <p>I build AI that ships, and I care about the part after the demo. That means agents that finish the task, retrieval you can trace back to a source, and systems that hold up when real users show up.</p>
+        <p>Over the past 2 years I&rsquo;ve worked across the AI stack, from data pipelines to multi-agent products: as the sole AI engineer on Bridgette at Bridgenow.ai, the sole backend engineer on MedEQ&rsquo;s AI medical education platform, and on ML data pipelines at Cyware.</p>
+        <p>Outside work, I build fast. I&rsquo;ve won the Vapi Voice AI and Self-Improving Agents hackathons in NYC. I&rsquo;ve been the only AI engineer on a team more than once, so I&rsquo;m comfortable owning everything from architecture and evals to APIs and getting it live.</p>
         <div class="tech-pills">
           <span class="pill">Claude API</span>
           <span class="pill">LangGraph</span>
@@ -196,78 +195,92 @@
     </div>
     <div class="timeline">
 
-      <!-- Bridge AI -->
+      <!-- MedEQ -->
       <div class="timeline-item reveal">
         <div class="timeline-dot active"></div>
         <div class="exp-card">
           <div class="exp-header">
             <div>
-              <div class="exp-role">AI/ML Engineer</div>
-              <div class="exp-company">Bridge AI &middot; USA</div>
+              <div class="exp-role">AI Engineer</div>
+              <div class="exp-company">MedEQ &middot; USA</div>
             </div>
-            <div class="exp-date">Aug 2025 &ndash; Present</div>
+            <div class="exp-date">Apr 2026 &ndash; Present</div>
           </div>
           <ul class="exp-bullets">
-            <li>Built <strong>Bridgette</strong>, an agentic AI assistant for a B2B marketplace, replacing a 10+ step workflow (search &rarr; filter &rarr; invite &rarr; negotiate) with a single conversational interface.</li>
-            <li>Designed a multi-step tool-calling agent using <strong>Claude (Anthropic API)</strong> and DSPy for structured prompt optimization and execution control.</li>
-            <li>Designed agent decision framework enabling autonomous execution across retrieval, structured queries, and response generation.</li>
+            <li>Sole backend engineer on <strong>MedEQ</strong>, an AI-powered continuing medical education platform where clinicians practice against Claude-driven patient simulations; owned architecture across FastAPI, Cloudflare Workers, and Supabase (Postgres + pgvector).</li>
+            <li>Architected a <strong>7-module CME accreditation system</strong> (identity &amp; NPI verification, idempotent batch credit engine, typed/spoken reflection workflow, certificates, audit reporting) built to ACCME requirements with an external accreditation partner.</li>
           </ul>
           <ul class="exp-bullets bullets-extra">
-            <li>Architected production <strong>dual-agent system</strong> (companies vs. experts) supporting workflows such as expert matching, engagement creation, and earnings analysis via natural language.</li>
-            <li>Developed 8 production-grade tool schemas with strict runtime validation (Zod), ensuring reliable execution across agent decision and tool-calling layers.</li>
-            <li>Improved end-to-end agent task success rate from <strong>~62% to ~84%</strong> by identifying and fixing gaps across retrieval, reasoning, and execution layers.</li>
-            <li>Reduced hallucinated or incomplete responses by <strong>~25%</strong> through validation layers and fallback mechanisms, evaluated across ~500+ test queries.</li>
-            <li>Reduced average response time from <strong>~1.2s to sub-400ms</strong> via prompt optimization and query-level caching.</li>
-            <li>Sole AI engineer &mdash; owned end-to-end system design covering agent architecture, tool orchestration, backend APIs, and frontend streaming integration.</li>
+            <li>Rebuilt the <strong>FDA drug-label RAG ingestion pipeline</strong> with end-to-end source lineage across all 15 FDA label sections, so every clinical answer is traceable to its regulatory source.</li>
+            <li>Built a data-driven <strong>clinical simulation engine</strong> with severity-based patient vitals logic and orchestration observability across multi-call LLM flows, making AI behavior auditable for clinical reviewers.</li>
           </ul>
           <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         </div>
       </div>
 
-      <!-- Capgemini -->
+      <!-- Bridgenow.ai -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Generative AI Engineer</div>
+              <div class="exp-company">Bridgenow.ai &middot; USA</div>
+            </div>
+            <div class="exp-date">Oct 2025 &ndash; Apr 2026</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Sole AI engineer on <strong>Bridgette</strong>, an agentic assistant for a B2B expert marketplace, replacing a 10+ step workflow (search &rarr; filter &rarr; invite &rarr; negotiate) with a single conversational interface; owned agent architecture, backend APIs, and frontend streaming.</li>
+            <li>Architected a production <strong>dual-agent system</strong> (companies vs. experts) using Claude and DSPy, with 8 Zod-validated tool schemas powering expert matching, engagement creation, and earnings analysis.</li>
+          </ul>
+          <ul class="exp-bullets bullets-extra">
+            <li>Raised end-to-end task success from <strong>~62% to ~84%</strong> and cut hallucinated or incomplete responses by <strong>~25%</strong> through validation layers and fallbacks, evaluated on 500+ test queries.</li>
+            <li>Reduced average response time from <strong>~1.2s to under 400ms</strong> through prompt optimization and query-level caching.</li>
+          </ul>
+          <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
+        </div>
+      </div>
+
+      <!-- Cyware -->
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="exp-card">
           <div class="exp-header">
             <div>
               <div class="exp-role">AI Engineer</div>
-              <div class="exp-company">Capgemini &middot; India</div>
+              <div class="exp-company">Cyware &middot; Bengaluru, India</div>
             </div>
-            <div class="exp-date">Apr 2021 &ndash; Dec 2023</div>
+            <div class="exp-date">Jan 2023 &ndash; Dec 2023</div>
           </div>
           <ul class="exp-bullets">
-            <li>Built <strong>document intelligence platform</strong> using hybrid RAG (Azure OpenAI + BM25), replacing manual document review for ~120 internal users across multiple teams.</li>
-            <li>Improved retrieval accuracy for enterprise document queries by <strong>~32%</strong> by combining dense embeddings with BM25 re-ranking across 500K+ unstructured documents.</li>
-            <li>Designed <strong>LangGraph-based pipelines</strong> with clear separation of retrieval, reasoning, and response generation, improving response reliability by ~35%.</li>
+            <li>Built <strong>Python pipelines</strong> to parse, normalize, and sanitize raw security logs into structured, high-signal datasets feeding downstream ML anomaly detection models.</li>
+            <li>Integrated frontend threat-intelligence dashboards with backend AI/ML services, resolving <strong>150+ integration issues</strong> to deliver model-driven risk scores to SOC analysts in real time.</li>
           </ul>
           <ul class="exp-bullets bullets-extra">
-            <li>Developed FastAPI inference services handling <strong>200+ concurrent requests</strong> with consistent sub-second response times.</li>
-            <li>Introduced confidence-based validation and context filtering that reduced hallucinated or irrelevant responses by <strong>~27%</strong> based on internal evaluation benchmarks.</li>
-            <li>Cut inference latency by <strong>~40%</strong> through prompt compression, caching, and retrieval pre-filtering.</li>
-            <li>Containerized services using Docker and implemented CI/CD pipelines, reducing deployment time from hours to <strong>~15 minutes</strong>.</li>
+            <li>Led the <strong>Vue 2 &rarr; Vue 3 migration</strong> of threat-intelligence dashboards, improving rendering performance of live predictive risk-scoring views by <strong>30%</strong>.</li>
+            <li>Improved product stability by <strong>40%</strong> through systematic bug resolution in an Agile workflow (Git, Bitbucket, Jira).</li>
           </ul>
           <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         </div>
       </div>
 
-      <!-- CitiusTech -->
+      <!-- Code Tree -->
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="exp-card">
           <div class="exp-header">
             <div>
-              <div class="exp-role">Machine Learning Engineer</div>
-              <div class="exp-company">CitiusTech Healthcare Technology Pvt. Ltd. &middot; India</div>
+              <div class="exp-role">Frontend Development Intern</div>
+              <div class="exp-company">Code Tree Software Solutions &middot; India</div>
             </div>
-            <div class="exp-date">Aug 2019 &ndash; Mar 2021</div>
+            <div class="exp-date">Jun 2021 &ndash; Aug 2021</div>
           </div>
           <ul class="exp-bullets">
-            <li>Built Python/SQL pipelines processing <strong>1M+ patient and claims records</strong>, reducing data preparation time by ~30% for downstream ML workflows.</li>
-            <li>Developed 30-day hospital readmission prediction models using <strong>XGBoost and Random Forest</strong>, achieving ~82% AUC and enabling early identification of high-risk patients.</li>
-            <li>Applied PCA and domain-driven feature engineering on clinical and claims data, improving model F1-score by <strong>~12%</strong> and reducing feature dimensionality by ~40%.</li>
+            <li>Developed <strong>10+ responsive interfaces</strong> for the Andhra Pradesh State Warehousing Corporation portal using Angular and Bootstrap.</li>
+            <li>Optimized application architecture for a <strong>25% improvement</strong> in page load speed and full mobile responsiveness.</li>
           </ul>
           <ul class="exp-bullets bullets-extra">
-            <li>Resolved recurring pipeline failures including data inconsistencies and job timeouts, reducing failure rates by <strong>~35%</strong> while consistently meeting SLA timelines.</li>
+            <li>Integrated the frontend with backend SQL databases, driving a <strong>15% increase</strong> in user engagement through better access to logistics and inventory data.</li>
           </ul>
           <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         </div>
@@ -655,12 +668,12 @@
     <div class="contact-card reveal">
       <p class="contact-cta">Let&rsquo;s build something <span class="grad-text">remarkable</span></p>
       <p class="contact-sub">
-        Open to full-time roles in Generative AI Engineering, LLM Systems, and Agentic AI.<br>
-        Based in Hauppauge, NY &middot; OPT Work Authorized
+        Open to full-time roles in AI Engineering, LLM Systems, and Agentic AI.<br>
+        Based in New York, NY &middot; OPT Work Authorized
       </p>
       <div class="contact-links">
-        <a href="mailto:koushikvasa2912@gmail.com" class="contact-link">
-          <span class="contact-icon">&#x2709;</span> koushikvasa2912@gmail.com
+        <a href="mailto:vasakoushik@gmail.com" class="contact-link">
+          <span class="contact-icon">&#x2709;</span> vasakoushik@gmail.com
         </a>
         <a href="tel:+15714202558" class="contact-link">
           <span class="contact-icon">&#x260E;</span> +1 (571) 420-2558
@@ -678,7 +691,7 @@
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <span>&copy; 2026 Koushik Vasa &middot; Generative AI Engineer</span>
+  <span>&copy; 2026 Koushik Vasa &middot; AI Engineer</span>
 </footer>
 
 <!-- Main JS -->
