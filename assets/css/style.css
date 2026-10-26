@@ -835,6 +835,13 @@ section {
   color: var(--text);
 }
 
+.project-award {
+  font-size: clamp(0.6rem, 1vw, 0.68rem);
+  color: var(--accent3);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
 .project-desc {
   font-size: clamp(0.66rem, 1.2vw, 0.75rem);
   color: var(--muted);
