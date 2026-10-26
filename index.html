@@ -280,60 +280,82 @@
       <!-- 1. Guardian -->
       <div class="project-card reveal">
         <div class="project-tag">Agentic AI</div>
-        <div class="project-name">Guardian</div>
+        <div class="project-name">Guardian &mdash; AI Scam Shield for Families</div>
         <div class="project-award">&#x1F948; 2nd Place, Best Use of SurrealDB Agent Memory &middot; Daytona HackSprint NYC 2026</div>
-        <p class="project-desc">AI scam shield for families. Intercepts scam texts sent to elderly parents, verifies them by calling the real family member, locks money requests behind a second family &ldquo;key&rdquo;, and explains the verdict to the parent in Telugu, English or Spanish.</p>
+        <div class="project-team">Built with Akash Devulapally</div>
+        <p class="project-desc">An agentic AI system that intercepts scam texts sent to elderly parents, verifies them by calling the real family member, locks money requests behind a second family &ldquo;key&rdquo;, and explains the verdict to the parent in Telugu, English or Spanish.</p>
+        <ul class="exp-bullets bullets-extra">
+          <li>Verify by callback: when a text claims to be family, Guardian calls the real relative on their saved number to confirm or deny it.</li>
+          <li>Money second key: money requests stay locked until a second family member approves with a press-and-hold. The AI can never approve money.</li>
+          <li>Safe link opening: suspicious links are opened in a throwaway Daytona sandbox via a cloud browser, analyzed, and destroyed.</li>
+          <li>Multilingual voice calls (Telugu, English, Spanish) with a family safe phrase and a teach-back question.</li>
+          <li>SurrealDB Agent Memory: every verdict is remembered, so repeat scams are caught instantly for any family, with a retrieval trace.</li>
+          <li>Rules-first safety: the LLM only extracts signals; a deterministic rules engine decides, and every warning cites the rule that fired. Live Arize evals on every case.</li>
+        </ul>
+        <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         <div class="project-stack">
           <span class="stack-tag">Python</span>
           <span class="stack-tag">FastAPI</span>
           <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">TypeScript</span>
           <span class="stack-tag">ElevenLabs</span>
           <span class="stack-tag">Twilio</span>
-          <span class="stack-tag">SurrealDB</span>
+          <span class="stack-tag">SurrealDB Agent Memory</span>
           <span class="stack-tag">Daytona</span>
+          <span class="stack-tag">Anchor Browser</span>
           <span class="stack-tag">Arize</span>
           <span class="stack-tag">AWS Bedrock</span>
         </div>
         <div class="project-links">
           <a href="https://www.youtube.com/watch?v=VIz3avMqgVI" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Demo</a>
-          <a href="https://github.com/koushikvasa/guardian" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
+          <a href="https://github.com/koushikvasa/guardian" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Code</a>
         </div>
       </div>
 
-      <!-- 2. Sonus -->
+      <!-- 2. ClearCare -->
+      <div class="project-card reveal">
+        <div class="project-tag">Generative AI</div>
+        <div class="project-name">ClearCare &mdash; AI Healthcare Cost Advocate for Seniors</div>
+        <div class="project-award">&#x1F949; 3rd Place, Best Use of Lightdash &middot; Self-Improving AI Agents Hackathon, NYC 2026 (200+ builders, hosted at Datadog)</div>
+        <p class="project-desc">A voice-first AI advocate that tells Medicare patients where to go for care and what it will actually cost them out-of-pocket, before they go.</p>
+        <ul class="exp-bullets bullets-extra">
+          <li>Describe symptoms and show an insurance card; ClearCare recommends where to go and estimates real out-of-pocket cost.</li>
+          <li>Uses a governed &ldquo;source of truth&rdquo; (Lightdash semantic layer) for insurance and cost data, so prices are never guessed.</li>
+          <li>Self-correcting agent loop (LangGraph): when it finds a data inconsistency, it fixes its own reasoning before answering.</li>
+          <li>Calm, human-like voice interface designed for seniors who struggle with small screens.</li>
+        </ul>
+        <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">LangGraph</span>
+          <span class="stack-tag">Lightdash</span>
+          <span class="stack-tag">Voice AI</span>
+        </div>
+        <div class="project-links">
+          <a href="https://clearcare-orpin.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Live App</a>
+        </div>
+      </div>
+
+      <!-- 3. Sonus -->
       <div class="project-card reveal">
         <div class="project-tag">Clinical AI</div>
-        <div class="project-name">Sonus</div>
-        <p class="project-desc">AI-powered clinical voice intake for hospitals. Conducts structured pre-consultation interviews with patients, capturing symptoms and clinical context, then generates formatted SOAP notes ready for physicians.</p>
+        <div class="project-name">Sonus &mdash; Voice AI for Pre-Visit Patient Interviews</div>
+        <div class="project-award">&#x1F3C6; Winner &middot; Voice AI Hackathon, NYC 2026 &middot; Built solo in one night</div>
+        <p class="project-desc">An AI voice agent that interviews hospital patients before their doctor arrives and hands the physician a formatted clinical note before they walk in.</p>
+        <ul class="exp-bullets bullets-extra">
+          <li>Conducts a natural voice interview covering pain, symptoms and emotional state.</li>
+          <li>Converts the conversation into a structured clinical note ready for the physician.</li>
+          <li>Targets the intake layer of the documentation burden: physicians spend more time on paperwork than with patients.</li>
+          <li>Built solo overnight; won the event judged by Eva Zheng, Kevin Koo and Ryan Ratner.</li>
+        </ul>
+        <button class="read-more-btn" aria-expanded="false">Read More &#x2193;</button>
         <div class="project-stack">
-          <span class="stack-tag">Next.js 16</span>
-          <span class="stack-tag">TypeScript</span>
-          <span class="stack-tag">Tailwind CSS</span>
           <span class="stack-tag">Vapi</span>
-          <span class="stack-tag">Claude Sonnet</span>
-          <span class="stack-tag">Tavily</span>
+          <span class="stack-tag">Cartesia</span>
+          <span class="stack-tag">LLMs</span>
         </div>
         <div class="project-links">
           <a href="https://sonus-li94.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Live Demo</a>
-        </div>
-      </div>
-
-      <!-- 3. ClearCare -->
-      <div class="project-card reveal">
-        <div class="project-tag">Generative AI</div>
-        <div class="project-name">ClearCare</div>
-        <p class="project-desc">AI Medicare Cost Navigator with a LangGraph 8-node multi-agent pipeline mapping patient symptoms to procedures and calculating real out-of-pocket costs across 2.8M+ CMS NPI providers.</p>
-        <div class="project-stack">
-          <span class="stack-tag">Next.js 14</span>
-          <span class="stack-tag">FastAPI</span>
-          <span class="stack-tag">LangGraph</span>
-          <span class="stack-tag">GPT-4o</span>
-          <span class="stack-tag">ElevenLabs</span>
-          <span class="stack-tag">Supabase</span>
-        </div>
-        <div class="project-links">
-          <a href="https://clearcare-orpin.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; Live Demo</a>
-          <a href="https://github.com/koushikvasa/clearcare" target="_blank" rel="noopener noreferrer" class="project-link">&#x2197; GitHub</a>
         </div>
       </div>
 

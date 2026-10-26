@@ -364,11 +364,11 @@ if (window.matchMedia('(hover: hover)').matches) {
 }
 
 /* ================================================
-   10. READ MORE / READ LESS (Experience)
+   10. READ MORE / READ LESS (Experience + Projects)
 ================================================ */
 document.querySelectorAll('.read-more-btn').forEach(btn => {
   btn.addEventListener('click', function () {
-    const card  = this.closest('.exp-card');
+    const card  = this.closest('.exp-card, .project-card');
     const extra = card.querySelector('.bullets-extra');
     if (!extra) return;
     const isOpen = extra.classList.contains('open');
