@@ -777,6 +777,7 @@ section {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: clamp(14px, 2.5vw, 24px);
   margin-top: clamp(32px, 5vw, 60px);
 }
@@ -842,25 +843,15 @@ section {
   line-height: 1.6;
 }
 
-.project-team {
-  font-size: clamp(0.6rem, 1vw, 0.68rem);
-  color: var(--muted);
-  letter-spacing: 0.04em;
-}
-
 .project-card .exp-bullets li {
   font-size: clamp(0.64rem, 1.1vw, 0.72rem);
 }
 
 .project-card .bullets-extra.open { max-height: 1200px; }
 
-/* Don't stretch row-mates to match an expanded card */
-.projects-grid:has(.bullets-extra.open) { align-items: start; }
-
 .project-card .read-more-btn {
   margin-top: 0;
-  text-align: left;
-  width: fit-content;
+  align-self: flex-start;
 }
 
 .project-desc {
