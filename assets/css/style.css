@@ -777,7 +777,6 @@ section {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  align-items: start;
   gap: clamp(14px, 2.5vw, 24px);
   margin-top: clamp(32px, 5vw, 60px);
 }
@@ -854,17 +853,21 @@ section {
   align-self: flex-start;
 }
 
+/* Don't stretch row-mates to match an expanded card */
+.projects-grid:has(.bullets-extra.open) { align-items: start; }
+
 .project-desc {
   font-size: clamp(0.66rem, 1.2vw, 0.75rem);
   color: var(--muted);
   line-height: 1.8;
-  flex: 1;
 }
 
+/* Equal-height cards: tags + links sit on the bottom edge */
 .project-stack {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
 }
 
 .stack-tag {
